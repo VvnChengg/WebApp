@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>My Web App</title>
-  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="mainPage.css">
 </head>
 <body style="background-color: #faeccd;">
     
@@ -91,6 +91,7 @@
         <a>對環境帶來沈重的負擔</a>
     </div>
 
+    <!-- 左右切換的圖 -->
     <div class="slideshow-container">
 
         <!-- Full-width images with number and caption text -->
@@ -121,35 +122,8 @@
         <span class="dot" onclick="currentSlide(3)" style="top: 2200px; right: 23%;"></span> 
     </div>
 
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
-        
-        function plusSlides(n) {
-          showSlides(slideIndex += n);
-        }
-        
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-        
-        function showSlides(n) {
-          let i;
-          let slides = document.getElementsByClassName("mySlides");
-          let dots = document.getElementsByClassName("dot");
-          if (n > slides.length) {slideIndex = 1}    
-          if (n < 1) {slideIndex = slides.length}
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  
-          }
-          for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[slideIndex-1].style.display = "block";  
-          dots[slideIndex-1].className += " active";
-        }
-    </script>
 
+    <!-- 專欄文章 -->
     <div style="margin-top: 25px; margin-bottom: 10px; margin-left: 30px;">
         <a style="font-size: 48px;">專欄文章</a>
     </div>
@@ -197,30 +171,9 @@
         <button class="left">&lt;</button>
         <button class="right">&gt;</button>
     </div>
-    <script>
-        const buttonLeft = document.getElementsByClassName("left")[0];
-        buttonLeft.onclick = () => {
-            document.getElementById("articles-container").scrollLeft -= 300;
-        }
 
-        const buttonRight = document.getElementsByClassName("right")[0];
-        buttonRight.onclick = () => {
-            document.getElementById("articles-container").scrollLeft += 300;
-        }
-
-        var articles = document.getElementsByClassName("article");
-
-        for (var i = 0; i < articles.length; i++) {
-            articles[i].addEventListener("click", function() {
-                var articleIndex = Array.prototype.indexOf.call(articles, this);
-                var article = articles[articleIndex];
-                var content = article.content;
-                window.alert(content);
-            });
-        }
-    </script>
-
-
+    
+    <!-- 活動區 -->
     <div style="margin-top: 10px; margin-bottom: 10px; margin-left: 30px;">
         <a style="font-size: 48px;">活動區</a>
     </div>
@@ -251,40 +204,11 @@
       
           <button class="close-form">關閉</button>
         </div>
-      </div>
-
-      <script>
-        const createBtn = document.querySelector('.campaign-create');
-        const closeBtn = document.querySelector('.close-form');
-        const formContainer = document.querySelector('.campaign-form-container');
-
-        createBtn.addEventListener('click', () => {
-        formContainer.style.display = 'block';
-        });
-
-        closeBtn.addEventListener('click', () => {
-        formContainer.style.display = 'none';
-        });
-
-        const form = document.querySelector('form');
-        form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        
-        const eventName = document.querySelector('#campaign-name').value;
-        const eventDate = document.querySelector('#campaign-date').value;
-        const eventTime = document.querySelector('#campaign-time').value;
-        const eventLocation = document.querySelector('#campaign-location').value;
-        
-        // 將表單資料傳到後端進行處理
-        // ...
-        
-        form.reset();
-        formContainer.style.display = 'none';
-        });
-
-      </script>
+    </div>
 
     
-
+      <script src="./slidesShow.js"></script>
+      <script src="./articles.js"></script>
+      <script src="./campaignCreate.js"></script>
 </body>
 </html>

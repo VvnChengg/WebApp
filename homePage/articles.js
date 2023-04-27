@@ -34,23 +34,25 @@ var articles = [
 //     container.appendChild(articleDiv);
 // }
 
+const buttonLeft = document.getElementsByClassName("left")[0];
+buttonLeft.onclick = () => {
+    document.getElementById("articles-container").scrollLeft -= 300;
+}
+
+const buttonRight = document.getElementsByClassName("right")[0];
+buttonRight.onclick = () => {
+    document.getElementById("articles-container").scrollLeft += 300;
+}
+
 var articles = document.getElementsByClassName("article");
 
 for (var i = 0; i < articles.length; i++) {
-  articles[i].addEventListener("click", function() {
-    var articleIndex = Array.prototype.indexOf.call(articles, this);
-    var article = articles[articleIndex];
-    var content = article.content;
-    window.alert(content);
-  });
+    articles[i].addEventListener("click", function() {
+        var articleIndex = Array.prototype.indexOf.call(articles, this);
+        var article = articles[articleIndex];
+        var content = article.content;
+        window.alert(content);
+    });
 }
 
-// var scrollAmount = 300;
 
-// document.querySelector("#articles-container button.left").addEventListener("click", function() {
-//   document.getElementById("articles-container").scrollLeft -= scrollAmount;
-// });
-
-// document.querySelector("#articles-container button.right").addEventListener("click", function() {
-//   document.getElementById("articles-container").scrollLeft += scrollAmount;
-// });
