@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>My Web App</title>
+  <link rel="stylesheet" href="platform.css">
+</head>
+<body style="background-color: #faeccd;">
+    
+    <header class="header-container1">
+        <div class="header-links1">
+            <a href="#" class="header-link1" style="margin-left: 40px;">語言</a>
+            <a href="#" class="header-link1">登入</a>
+            <a href="#" class="header-link1">註冊</a>
+        </div>
+    </header>
+    <header class="header-container2">
+
+        <h1 class="header-logo">出清台大2.0</h1>
+        <div class="header-links2">
+            <a href="../homePage/mainPage.html" class="header-link2" style="margin-left: 150px;">主頁</a>
+            <a href="#" class="header-link2">活動區</a>
+            <a href="#" class="header-link2">二手物品交易區</a>
+            <a href="#" class="header-link2" style="margin-right: 190px;">聊天室</a>
+        <div class="header-links1">
+            <div class="search-bar">
+                <input type="text" placeholder="搜尋...">
+            </div>
+        </div>
+    </div>
+    </header>
+
+    <hr style="border: 0.1px solid black; margin: 0;">
+
+    <!-- 按鈕 -->
+    <button id="sell-button">我要販賣物品</button>
+
+    <div id="sell-form">
+        <h2>販賣物品</h2>
+        <form>
+            <label for="item-name">物品名稱：</label>
+            <input type="text" id="item-name" required>
+
+            <label for="item-price">價格：</label>
+            <input type="number" id="item-price" required>
+
+            <label>交易方式：</label>
+            <select id="item-transaction">
+                <option value="face-to-face">僅面交</option>
+                <option value="shipping">僅寄送</option>
+                <option value="both">面交、寄送皆可</option>
+            </select>
+
+            <label for="location">面交地點：</label>
+            <input type="text" id="item-location">
+
+            <label for="quantity">數量：</label>
+            <input type="number" id="item-quantity" required>
+
+            <label>分類：</label>
+            <select id="item-category">
+                <option value="clothing">衣物</option>
+                <option value="shoes">鞋子</option>
+                <option value="3c">3C</option>
+                <option value="others">其他</option>
+            </select>
+
+            <label for="condition">商品狀況：</label>
+            <input type="text" id="item-condition" required>
+
+            <label for="image">上傳圖片：</label>
+            <input type="file" id="item-image" accept="image/*" required>
+
+            <div>
+            <button type="button" id="cancel-button">取消</button>
+            <button type="submit" id="sell-submit-button">販賣</button>
+            </div>
+        </form>
+    </div>
+
+    
+    <!-- 商品類別 -->
+    <div class="categories">
+        <ul>
+          <li class="active"><a href="#">全部</a></li>
+          <li><a href="#">衣物</a></li>
+          <li><a href="#">鞋子</a></li>
+          <li><a href="#">3C</a></li>
+          <li><a href="#">其他</a></li>
+        </ul>
+    </div>
+
+    <div id="item-container"></div>
+    
+    <script src="platform.js"></script>
+    <script src="sell-form.js"></script>
+</body>
+</html>
