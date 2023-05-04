@@ -1,214 +1,116 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-  <meta charset="UTF-8">
-  <title>My Web App</title>
-  <link rel="stylesheet" href="./style.css">
+	<meta charset="UTF-8">
+	<title>Website Tilte</title>
+	<link rel="stylesheet" href="./style.css">
+	<link rel="icon" href="./images/icon.png" type="image/png">
 </head>
-<body style="background-color: #faeccd;">
-    
-    <header class="header-container1">
-        <div class="header-links1">
-            <a href="#" class="header-link1" style="margin-left: 40px;">語言</a>
-            <a href="#" class="header-link1">登入</a>
-            <a href="#" class="header-link1">註冊</a>
-        </div>
-    </header>
-    <header class="header-container2">
 
-        <h1 class="header-logo">出清台大2.0</h1>
-        <div class="header-links2">
-            <a href="#" class="header-link2" style="margin-left: 150px;">主頁</a>
-            <a href="#" class="header-link2">活動區</a>
-            <a href="#" class="header-link2">二手物品交易區</a>
-            <a href="#" class="header-link2" style="margin-right: 190px;">聊天室</a>
-        <div class="header-links1">
-            <div class="search-bar">
-                <input type="text" placeholder="搜尋...">
-            </div>
-        </div>
-    </div>
-    </header>
+<body>
+	<!-- top bar -->
+	<div class="top-bar-container">
+		<div class="top-bar-menu container">
+			<a href="#">
+				<img src="./images/language.png" alt="">
+				<div>語言</div>
+			</a>
+			<a href="#">
+				<img src="./images/person.png" alt="">
+				<div>會員登入</div>
+			</a>
+		</div>
+	</div>
 
-    <hr style="border: 0.1px solid black; margin: 0;">
-    
-    <div style="display:flex; justify-content:center; align-items:center; margin-top: 40px;">
-        <a class="page-title">減少垃圾從重複使用開始</a>
-    </div>  
+	<!-- nav bar -->
+	<div class="nav-bar-container">
+		<div class="nav-bar-menu container">
+			<div class="menu">
+				<ul>
+					<li class="menu-item"><a href="#">首頁</a></li>
+					<li class="menu-item"><a href="#">二手市集</a></li>
+					<li class="menu-item"><a href="#article">專欄文章</a></li>
+					<li class="menu-item"><a href="#campaign">活動</a></li>
+				</ul>
+			</div>
+			<div class="top-search">
+				<a><img src="./images/search.png" alt=""></a>
+			</div>
+			<div class="show-search" id="show-search">
+				<form role="search" method="get" id="searchform" action="">
+					<div><input type="text" class="search-input" placeholder="搜尋" name="s" id="s" /></div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-    <div style="display:flex; justify-content:center; align-items:center; margin-top: 60px;">
-        <img src="./images/pic1.jpg" style="opacity: 1;">
-    </div>
+	<!-- cover  -->
+	<section class="cover-container">
+		<div class="cover container"></div>
+	</section>
 
-    <hr style="border: 0.1px solid black; margin-top: 40px; margin-bottom: 60px;">
-
-    <img src="./images/pic2.jpg" style="opacity: 0.3; position: relative;">
-
-    <div class="title-donate">
-        <p>捐贈二手物資</p>
-    </div>
-
-    <div style="margin-left: 30px;">
-        <br><br>
-        <a>每年都在買新衣服，去年的衣服已經過季不想穿了嗎？以前買的物品現在已經不需要了嗎？</a>
-        <br><br>
-        <a>對你來説多出來的泡麵、罐頭、烤箱、電腦螢幕、書籍、小孩穿不下的衣鞋，都可能是另一個孩子或家庭期待已久的實用好物呢！<br>與其丟到垃圾桶，不如把它們送給其他需要的人！</a>
-        <br><br>
-        <a>全台各地設有政府核准設立的舊衣回收箱，方便將穿不到的衣服回收給需要的人。<br>行政院環保署建立「不用品藏寶地圖」網站，匯集全國超過1500家舊衣回收等站點資料，方便民眾查詢。</a>
-        <br><br>
-        <a>除了政府的舊衣回收箱地圖，各區也有民營的捐贈平台，讓你不需要的物品成為別人的寶貝。<br>各平台的物資需求不同，歡迎點擊旁邊的連結查找尋合適的歸宿。</a>
-    </div>
-
-    <div class="outer-link" style="top: 1200px;">
-        <a href="https://recycle.epa.gov.tw/utmap/MapQry">＞ 舊衣回收箱站點</a>
-    </div>
-    <div class="outer-link" style="top:1300px">
-        <a href="https://www.facebook.com/hsinyespring/">＞ 心怡舊衣回收中心</a>
-    </div>
-    <div class="outer-link" style="top:1400px">
-        <a href="https://www.step30.org/">＞ 舊鞋救命step30</a>
-    </div>
-    <div class="outer-link" style="top:1500px">
-        <a href="https://ycswf.org.tw/helpus/donate-goods/">＞ 育成社會福利基金會</a>
-    </div>
-    <div class="outer-link" style="top:1600px">
-        <a href="https://www.spbook.com.tw/donate_reservation.php?d=114">＞ 台灣展翅協會×書寶二手書店</a>
-    </div>
-    <div class="outer-link" style="top:1700px">
-        <a href="https://www.sunshine.org.tw/join_us/book/about/15">＞ 陽光基金會</a>
-    </div>
-    <div class="outer-link" style="top:1800px">
-        <a href="https://www.eslitefoundation.org.tw/1112/1486/1497/11842/11848/">＞ 誠品文化藝術基金會</a>
-    </div>
-
-    <hr style="border: 0.1px solid black; margin-top: 80px; margin-bottom: 60px;">
-
-    <div class="toys">
-        <a>台灣每年有數百噸玩具被丟棄</a>
-        <br><br>
-        <a>高達90％的玩具以塑膠製成，最終超過80％會被焚燒或掩埋</a>
-        <br><br>
-        <a>對環境帶來沈重的負擔</a>
-    </div>
-
-    <!-- 左右切換的圖 -->
-    <div class="slideshow-container">
-
-        <!-- Full-width images with number and caption text -->
-        <div class="mySlides fade">
-          <div class="numbertext">1 / 3</div>
-          <img src="./images/pic3.jpeg" style="width: 100%; height: 250px; top: 2100px;">
-        </div>
-      
-        <div class="mySlides fade">
-          <div class="numbertext">2 / 3</div>
-          <img src="./images/pic4.jpg.webp" style="width: 100%; height: 250px; top: 2100px;">
-        </div>
-      
-        <div class="mySlides fade">
-          <div class="numbertext">3 / 3</div>
-          <img src="./images/pic5.jpg" style="width: 100%; height: 250px; top: 2100px;">
-        </div>
-      
-        <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
-    
-    <!-- The dots/circles -->
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)" style="top: 2200px; right: 27%;"></span> 
-        <span class="dot" onclick="currentSlide(2)" style="top: 2200px; right: 25%;"></span> 
-        <span class="dot" onclick="currentSlide(3)" style="top: 2200px; right: 23%;"></span> 
-    </div>
+	<!-- article  -->
+	<section class="article-container" id="article">
+		<div class="article-div container">
+			<div class="article-shelves">
+				<div class="slide-row" id="slide">
+					<div class="slide-col" id="article-01">
+						<img src="./images/test.jpg" alt="">
+						<span> 斷捨離妙招 </span>
+					</div>
+					<div class="slide-col" id="article-02">
+						<img src="./images/test.jpg" alt="">
+						<span> 二手市集，新的綠色? </span>
+					</div>
+					<div class="slide-col">
+						<img src="./images/test.jpg" alt="">
+						<span> 網路市集挖寶! </span>
+					</div>
+					<div class="slide-col">
+						<img src="./images/test.jpg" alt="">
+						<span> 二手消費文化 </span>
+					</div>
+				</div>
+				<div class="indicator">
+					<span class="btn btn-active"></span>
+					<span class="btn"></span>
+					<span class="btn"></span>
+					<span class="btn"></span>
+				</div>
+			</div>
+		</div>
+	</section>
 
 
-    <!-- 專欄文章 -->
-    <div style="margin-top: 25px; margin-bottom: 10px; margin-left: 30px;">
-        <a style="font-size: 48px;">專欄文章</a>
-    </div>
-    <hr style="border: 0.1px solid black; margin: 0;">
+	<div class="test-container">
+		<div class="popup-page">
+			<div class="close-btn">&times;</div>
+			<h1>斷捨離妙招</h1>
+			<p>隨著現代社會的快速發展，人們的生活方式也越來越快節奏化，擁有更多的物品和資源似乎已成為一種追求。
+				然而，隨之而來的問題也逐漸浮現，例如物品的堆積、空間的狹窄和精神上的壓力等等。因此，
+				斷捨離已成為現代人注重健康生活的一種趨勢，讓人們擁有更簡潔、輕鬆、自由的生活。 <br><br>
 
-    <div id="articles-container">
-        <!-- 文章區塊在這裡 -->
-        <div class="article">
-            <img src="./images/pic3.jpeg" class="article-img">
-            <p class="article-title">title1</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic4.jpg.webp" class="article-img">
-            <p class="article-title">title2</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic5.jpg" class="article-img">
-            <p class="article-title">title3</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic3.jpeg" class="article-img">
-            <p class="article-title">title4</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic4.jpg.webp" class="article-img">
-            <p class="article-title">title5</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic5.jpg" class="article-img">
-            <p class="article-title">title6</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic3.jpeg" class="article-img">
-            <p class="article-title">title7</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic4.jpg.webp" class="article-img">
-            <p class="article-title">title8</p>
-        </div>
-        <div class="article">
-            <img src="./images/pic5.jpg" class="article-img">
-            <p class="article-title">title9</p>
-        </div>
+				斷捨離的概念是在日本被提出的，它是指在生活中捨去不必要的物品和過去的情感，以達到身心靈的平衡。
+				而要實現斷捨離的目的，人們需要找到一些妙招。 <br><br>
 
-        <button class="left">&lt;</button>
-        <button class="right">&gt;</button>
-    </div>
+				首先，可以利用物品的分類來協助斷捨離。例如，把物品分為「必要」和「不必要」，再進一步分為「可以賣」、
+				「可以捐」和「可以丟」等等，以便快速有效地處理物品。其次，對於那些無法決定是否要保留的物品，
+				可以利用時間的概念來幫助斷捨離。例如，把物品放置在一個指定的地方，如果在一定時間內沒有使用，就可以判定為不必要的物品。 <br><br>
 
-    
-    <!-- 活動區 -->
-    <div style="margin-top: 10px; margin-bottom: 10px; margin-left: 30px;">
-        <a style="font-size: 48px;">活動區</a>
-    </div>
-    <hr style="border: 0.1px solid black; margin: 0;">
+				最後，斷捨離的過程也需要持續不斷地進行，而不是一次性完成。人們可以每天挑選一個小的範圍進行斷捨離，
+				如此一來，不但可以避免過度疲勞，也可以保持良好的生活習慣。斷捨離的妙招不僅可以幫助人們擁有更整潔、
+				輕鬆、自由的生活，也可以幫助人們提高對物品和生活的意識。讓我們珍惜身邊的物品，保持一顆平靜的心，擁有一個簡潔而美好的生活。
+			</p>
+		</div>
+	</div>
 
-    <div class="campaign-create">
-        <a href="#"> 發起活動 >></a>
-    </div>
+	<!-- campaign  -->
+	<section class="campaign-container" id="campaign">
+		<div class="campaign-shelve container"></div>
+	</section>
 
-    <div class="campaign-form-container">
-        <div class="campaign-form">
-          <h2>創建活動</h2>
-          <form>
-            <label for="campaign-name">活動名稱</label>
-            <input type="text" id="campaign-name" name="campaign-name">
-      
-            <label for="campaign-date">日期</label>
-            <input type="date" id="campaign-date" name="campaign-date">
-      
-            <label for="campaign-time">時間</label>
-            <input type="time" id="campaign-time" name="campaign-time">
-      
-            <label for="campaign-location">地點</label>
-            <input type="text" id="campaign-location" name="campaign-location">
-      
-            <button class="submit">創建</button>
-          </form>
-      
-          <button class="close-form">關閉</button>
-        </div>
-    </div>
-
-    
-      <script src="./scripts/slidesShow.js"></script>
-      <script src="./scripts/articles.js"></script>
-      <script src="./scripts/campaignCreate.js"></script>
+	<script src="scripts/script.js"></script>
 </body>
+
 </html>

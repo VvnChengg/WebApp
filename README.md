@@ -5,8 +5,8 @@ This branch is mainly for `home page` developments and will be merged back after
 ### Current file structure
 * `index.html` -> the main file
 * `style.css` -> the style rendering for main file
-* `/scripts` -> directory store files like `*.js`
-* `/images` -> directory store images
+* `/scripts` -> store files like `*.js`
+* `/images` -> store all required images
 
 
 ### To-Do lists
