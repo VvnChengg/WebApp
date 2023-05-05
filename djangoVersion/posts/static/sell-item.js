@@ -22,20 +22,6 @@ submitBtn.addEventListener('click', () => {
     alert('請填寫必填項目');
     return;
   }
-
-  // 創建一個物品對象
-  const item = {
-    name: name,
-    price: price,
-    transaction: transaction,
-    location: location,
-    quantity: quantity,
-    category: category,
-    condition: condition
-    // 其他選填項目可以在這裡添加
-  };
-
-  console.log(item); // 印出物品對象
 });
 
 // 點擊取消按鈕關閉表單
@@ -44,27 +30,7 @@ cancelBtn.addEventListener('click', () => {
 });
 
 
-const itemContainer = document.querySelector('#item-container');
-
 // 提交表單時，建立一個新的商品並顯示在網頁上
 sellForm.addEventListener("submit", (event) => {
     sellForm.style.display = "none";
-
-    console.log('Submit button clicked')
-    event.preventDefault();
-    const itemName = document.getElementById("item-name").value;
-    const itemPrice = document.getElementById("item-price").value;
-    const itemImage = document.getElementById("item-image").value;
-    const newItem = document.createElement("div");
-    newItem.className = "newItem";
-    newItem.innerHTML = `
-      <img src="${itemImage}">
-      <h3>${itemName}</h3>
-      <p>價格：${itemPrice}</p>
-      <button class="item-details-button">詳細資訊</button>
-      <div class="item-details-container" style="display:none;">
-        <!-- 商品詳細資訊 -->
-      </div>
-    `;
-    itemContainer.appendChild(newItem);
   });
