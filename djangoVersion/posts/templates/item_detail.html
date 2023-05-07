@@ -1,0 +1,16 @@
+{% comment %} {% extends 'index.html' %}
+
+{% block content %}
+
+    <h2>Comments</h2>
+    {% for comment in comments %}
+        <p>{{ comment.content }}</p>
+    {% endfor %}
+
+    <h2>Add Comment</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Comment</button>
+    </form>
+{% endblock %} {% endcomment %}

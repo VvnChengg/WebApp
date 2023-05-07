@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>My Web App</title>
-  <link rel="stylesheet" href="{% static 'platform.css' %}">
+  <link rel="stylesheet" href="{% static 'sell-platform.css' %}">
 </head>
 <body style="background-color: #faeccd;">
     
@@ -39,40 +39,46 @@
 
     <div id="sell-form">
         <h2>販賣物品</h2>
-        <form method="post" action="{% url 'add_item' %}"> 
+        <form method="post" action="{% url 'add_item' %}" enctype="multipart/form-data"> 
             {% csrf_token %}
-            <label for="item-name">物品名稱：</label>
-            <input type="text" id="item-name" name="name" required>
+            <label>物品名稱：
+                <input type="text" id="item-name" name="name" required>
+            </label>
 
-            <label for="item-price">價格：</label>
-            <input type="number" id="item-price" name="price" required>
+            <label>價格：
+                <input type="number" id="item-price" name="price" required>
+            </label>
 
             <label>交易方式：</label>
             <select id="item-transaction" name="transaction_type">
-                <option value="face-to-face">僅面交</option>
-                <option value="shipping">僅寄送</option>
-                <option value="both">面交、寄送皆可</option>
+                <option value="僅面交">僅面交</option>
+                <option value="僅寄送">僅寄送</option>
+                <option value="面交、寄送皆可">面交、寄送皆可</option>
             </select>
 
-            <label for="item-location">面交地點：</label>
-            <input type="text" id="item-location" name="transaction_location">
+            <label>面交地點：
+                <input type="text" id="item-location" name="transaction_location">
+            </label>
 
-            <label for="item-quantity">數量：</label>
-            <input type="number" id="item-quantity" name="quantity" required>
+            <label>數量：
+                <input type="number" id="item-quantity" name="quantity" required>
+            </label>
 
             <label>分類：</label>
             <select id="item-category" name="category">
-                <option value="clothing">衣物</option>
-                <option value="shoes">鞋子</option>
-                <option value="3c">3C</option>
-                <option value="others">其他</option>
+                <option value="衣物">衣物</option>
+                <option value="鞋子">鞋子</option>
+                <option value="3C">3C</option>
+                <option value="其他">其他</option>
             </select>
 
-            <label for="item-condition">商品狀況：</label>
-            <input type="text" id="item-condition" name="condition" required>
+            <label>商品狀況：
+                <input type="text" id="item-condition" name="condition" required>
+            </label>
 
-            <label for="item-image">上傳圖片：</label>
-            <input type="file" id="item-image" accept="image/*" name="image" required>
+            <label>上傳圖片：
+                <input type="file" id="item-image" accept="image/*" name="image" required>
+            </label>
 
             <div>
             <button type="button" id="cancel-button">取消</button>
@@ -96,12 +102,54 @@
     <div id="item-container">
         {% for item in items %}
             <div class="newItem">
-                <img src={{ item.image.url }} alt="item image"></img>
-                <h3>{{ item.name }}</h3>
-                <p>價格：{{ item.price }}</p>
-                <button class="item-details-button">詳細資訊</button>
-                <div class="item-details-container" style="display:none;">
+                <div class="item-image-container">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}"></img>
+                </div>
+                <div class="item-text-container">
+                    <h3>{{ item.name }}</h3>
+                    <p>＄{{ item.price }}</p>
+                    <button class="item-details-button">詳細資訊</button>
+                </div>
+            </div>
+            <div id="item-details-wrapper">
+                <div class="item-details-container">
                     <!-- 商品詳細資訊 -->
+                    <div class="item-details-image">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+                    </div>
+                    <div class="item-details-text">
+                        <h2>{{ item.name }}</h3>
+                        <h3>＄{{ item.price }}</p>
+                        <p>數量：{{ item.quantity }}</p>
+                        <p>分類：{{ item.category }}</p>
+                        <p>交易方式：{{ item.transaction_type }}</p>
+                        <p>面交地點：{{ item.transaction_location }}</p>
+                        <p>商品狀況：{{ item.condition }}</p>
+
+                        {% comment %} <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">提交留言</button>
+                        </form>
+                        {% if comments %}
+                        <div class="comments">
+                            <h4>留言 ({{ comments.count }})</h4>
+                            <ul>
+                                {% for comment in comments %}
+                                <li>
+                                    <div class="comment">
+                                        <p>{{ comment.content }}</p>
+                                        <p class="comment-info">{{ comment.created_at|date:"Y-m-d H:i:s" }}</p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %} 
+                        {% endcomment %}
+
+                        <button class="close-button">X</button>
+                    </div>
                 </div>
             </div>
         {% endfor %}
@@ -109,5 +157,6 @@
     
     <script src="{% static 'platform.js' %}"></script>
     <script src="{% static 'sell-item.js' %}"></script>
+    <script src="{% static 'item-details.js' %}"></script>
 </body>
 </html>
