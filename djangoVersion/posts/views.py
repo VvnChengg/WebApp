@@ -37,20 +37,3 @@ def add_item(request):
         return HttpResponseRedirect('/posts')
     else:
         return render(request, 'index.html')
-
-def item_detail(request, item_id):
-    item = get_object_or_404(Item, id=item_id)
-    comments = Comment.objects.filter(item=item)
-
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.item = item
-            comment.save()
-            return redirect('item_detail', item_id=item_id)
-    else:
-        form = CommentForm()
-
-    context = {'item': item, 'comments': comments, 'form': form}
-    return render(request, 'item_detail.html', context)

@@ -24,6 +24,7 @@
             <a href="#" class="header-link2">活動區</a>
             <a href="#" class="header-link2">二手物品交易區</a>
             <a href="#" class="header-link2" style="margin-right: 190px;">聊天室</a>
+        </div>
         <div class="header-links1">
             <div class="search-bar">
                 <input type="text" placeholder="搜尋...">
@@ -110,53 +111,31 @@
                     <p>＄{{ item.price }}</p>
                     <button class="item-details-button">詳細資訊</button>
                 </div>
-            </div>
-            <div id="item-details-wrapper">
-                <div class="item-details-container">
-                    <!-- 商品詳細資訊 -->
-                    <div class="item-details-image">
-                        <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-                    </div>
-                    <div class="item-details-text">
-                        <h2>{{ item.name }}</h3>
-                        <h3>＄{{ item.price }}</p>
-                        <p>數量：{{ item.quantity }}</p>
-                        <p>分類：{{ item.category }}</p>
-                        <p>交易方式：{{ item.transaction_type }}</p>
-                        <p>面交地點：{{ item.transaction_location }}</p>
-                        <p>商品狀況：{{ item.condition }}</p>
-
-                        {% comment %} <form method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="submit">提交留言</button>
-                        </form>
-                        {% if comments %}
-                        <div class="comments">
-                            <h4>留言 ({{ comments.count }})</h4>
-                            <ul>
-                                {% for comment in comments %}
-                                <li>
-                                    <div class="comment">
-                                        <p>{{ comment.content }}</p>
-                                        <p class="comment-info">{{ comment.created_at|date:"Y-m-d H:i:s" }}</p>
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
+                {% comment %} <div class="item-details-wrapper"> {% endcomment %}
+                    <div class="item-details-container">
+                        <!-- 商品詳細資訊 -->
+                        <div class="item-details-image">
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}" />
                         </div>
-                        {% endif %} 
-                        {% endcomment %}
-
-                        <button class="close-button">X</button>
+                        <div class="item-details-text">
+                            <h2>{{ item.name }}</h3>
+                            <h3>＄{{ item.price }}</p>
+                            <p>數量：{{ item.quantity }}</p>
+                            <p>分類：{{ item.category }}</p>
+                            <p>交易方式：{{ item.transaction_type }}</p>
+                            <p>面交地點：{{ item.transaction_location }}</p>
+                            <p>商品狀況：{{ item.condition }}</p>
+    
+                            <button class="close-button">X</button>
+                        </div>
                     </div>
-                </div>
+                {% comment %} </div> {% endcomment %}
             </div>
         {% endfor %}
     </div>
     
     <script src="{% static 'platform.js' %}"></script>
     <script src="{% static 'sell-item.js' %}"></script>
-    <script src="{% static 'item-details.js' %}"></script>
+    <script src="{% static 'item-details.js' %}?v=1"></script>
 </body>
 </html>

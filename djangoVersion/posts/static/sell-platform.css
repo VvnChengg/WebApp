@@ -328,7 +328,7 @@
   }
 
 /* 商品詳細資料 */
-#item-details-wrapper {
+.item-details-wrapper {
   display: none;
   position: fixed;
   top: 0;
@@ -341,7 +341,7 @@
 
 .item-details-container {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -349,8 +349,7 @@
   background-color: #f9f9f9;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
-  max-width: 500px;
+  width: 500px;
 }
 
 .item-details-container .item-details-image {
@@ -386,8 +385,8 @@
   color: #888;
 }
 
-.item-details-container .close-button {
-  position: absolute;
+.item-details-container .close-button { 
+  position: fixed;
   top: 10px;
   right: 10px;
   font-size: 18px;
