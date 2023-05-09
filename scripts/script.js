@@ -127,3 +127,23 @@ document.querySelector('#article-04').addEventListener('click', () => {
 document.querySelector('.popup-page .close-btn').addEventListener('click', () => {
     document.querySelector('.popup-page').classList.remove('active');
 });
+
+
+// search bar
+let search_flg = false;
+let search_btn = document.querySelector('.top-search');
+let search_bar = document.querySelector('.show-search');
+
+search_btn.onclick = function () {
+    if (search_flg === false) {
+        search_bar.classList.add('search-active');
+        search_flg = true;
+        document.querySelector('#top-search-btn').src = './images/cancel.png';
+    }
+    else {
+        search_bar.classList.remove('search-active');
+        search_flg = false;
+        document.querySelector('#top-search-btn').src = './images/search.png';
+    }
+    console.log(search_flg)
+}

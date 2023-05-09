@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<title>Website Tilte</title>
 	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="./styles/navbar.css">
+	<link rel="stylesheet" href="./styles/campaign.css">
 	<link rel="icon" href="./images/icon.png" type="image/png">
 </head>
 
@@ -35,7 +37,7 @@
 				</ul>
 			</div>
 			<div class="top-search">
-				<a><img src="./images/search.png" alt=""></a>
+				<a><img id="top-search-btn" src="./images/search.png" alt=""></a>
 			</div>
 			<div class="show-search" id="show-search">
 				<form role="search" method="get" id="searchform" action="">
@@ -94,10 +96,57 @@
 
 	<!-- campaign  -->
 	<section class="campaign-container" id="campaign">
-		<div class="campaign-shelve container"></div>
+		<div class="campaign-div container">
+			<div class="campaign-title">
+				<span>活動</span>
+			</div>
+			<div class="campaign-shelve">
+				<div class="campaign-row">
+					<div class="campaign-col campaign-add">
+						<div class="add-icon">+</div>
+						<span>新增活動</span>
+					</div>
+
+					<!-- card -->
+					<div class="campaign-col">
+						<div class="campaign-contents">
+							<span class="campaign-date">2023.02.23</span>
+							<span class="campaign-name">北海岸淨灘</span>
+							<span class="campaign-people">0 人已報名</span>
+							<div class="campaign-register">
+								<span>報名活動</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="campaign-form-container">
+				<div class="campaign-form-add">+</div>
+				<div class="campaign-form-close">&times;</div>
+				<span class="campaign-form-title">新增活動</span>
+
+				<span class="form-text">活動名稱</span>
+				<input type="text" id="campaign-form-name" name="campaign-form-name">
+
+				<span class="form-text">活動日期</span>
+				<input type="date" id="campaign-form-date" name="campaign-form-date">
+
+				<span class="form-text">活動時間</span>
+				<input type="time" id="campaign-form-time" name="campaign-form-time">
+
+				<span class="form-text">活動地點</span>
+				<input type="text" id="campaign-form-loca" name="campaign-form-loca">
+
+				<span class="form-text">活動描述（可略）</span>
+				<input type="text" id="campaign-form-desc" name="campaign-form-desc" class="campaign-form-desc">
+			</div>
+			<div class="campaign-form-overlay"></div>
+		</div>
 	</section>
 
 	<script src="scripts/script.js"></script>
+	<script src="scripts/campaign.js"></script>
 </body>
 
 </html>
