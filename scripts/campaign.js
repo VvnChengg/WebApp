@@ -51,3 +51,27 @@ function create_campaign (event) {
         </div>`
     )
 }
+
+// campaign dragger
+const campaign_shelve = document.querySelector('.campaign-shelve');
+let isDragStart = false, prePageX, preScrollLeft; 
+
+campaign_shelve.addEventListener('mousedown', (event) => {
+    isDragStart = true;
+    prePageX = event.pageX;
+    preScrollLeft = campaign_shelve.scrollLeft;
+});
+
+campaign_shelve.addEventListener('mouseup', () => {
+    isDragStart = false;
+});
+
+campaign_shelve.addEventListener('mousemove', (event) => {
+    if (!isDragStart) return;
+    event.preventDefault();
+    let positionDiff = event.pageX - prePageX;
+    campaign_shelve.scrollLeft = preScrollLeft - positionDiff;
+});
+
+
+
