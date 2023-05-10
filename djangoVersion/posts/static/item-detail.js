@@ -1,27 +1,16 @@
-var detailButtons = document.querySelectorAll('.item-details-button');
-var closeButtons = document.querySelectorAll('.close-button');
+const pathName = window.location.pathname; // "/posts/item/1/"
+const itemId = pathName.match(/(\d+)\/$/)[1]; // "1"
 
-detailButtons.forEach(function(button) {
-  button.addEventListener('click', function() {
-    var newItem = this.closest('.newItem');
-    var itemDetailsContainer = newItem.querySelector('.item-details-container');
-    itemDetailsContainer.style.display = 'block';
+const itemDetailsContainer = document.querySelector(`.item-details-container[data-item-id="${itemId}"]`);
+itemDetailsContainer.style.display = 'block';
 
-    const itemId = button.dataset.itemId;
-    const url = '/posts/item/' + itemId;  
-    window.location.href = url;
-  });
-});
+var closeButton = document.querySelector(`.close-button[data-item-id="${itemId}"]`);
 
-closeButtons.forEach(function(button) {
-  button.addEventListener('click', function() {
-    var newItem = this.closest('.newItem');
-    var itemDetailsContainer = newItem.querySelector('.item-details-container');
-    itemDetailsContainer.style.display = 'none';
 
-    // Remove item_id parameter from URL
-    var url = new URL(window.location.href);
-    url.searchParams.delete('item_id');
-    window.history.pushState({}, '', url);
-  });
-});
+closeButton.addEventListener('click', function() {
+  itemDetailsContainer.style.display = 'none';
+  var url = new URL(window.location.href);
+  url.searchParams.delete('item_id');
+  window.history.pushState({}, '', url);
+  window.location.href = 'http://127.0.0.1:8000/posts/';
+})

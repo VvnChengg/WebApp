@@ -122,7 +122,7 @@
                     <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
                 </div>
                 {% comment %} <div class="item-details-wrapper"> {% endcomment %}
-                    <div class="item-details-container">
+                    <div class="item-details-container" data-item-id="{{ item.item_id }}">
                         <!-- 商品詳細資訊 -->
                         <div class="item-details-image">
                             <img src="{{ item.image.url }}" alt="{{ item.name }}" />
@@ -165,6 +165,6 @@
     </div>
     
     <script src="{% static 'sell-item.js' %}"></script>
-    <script src="{% static 'item-detail.js' %}?v=1"></script>
+    <script src="{% static 'item-detail-for-index.js' %}?v=1"></script>
 </body>
 </html>

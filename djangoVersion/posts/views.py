@@ -17,7 +17,6 @@ def index(request, category=None):
         item.image = request.FILES.get('image')
         item.save()
 
-    # items = Item.objects.all()
     if category:
         items = Item.objects.filter(category=category)
     else:
@@ -42,7 +41,12 @@ def add_item(request):
         return render(request, 'index.html')
 
 
-def item_detail(request, item_id):
+def item_detail(request, item_id, category=None):
+    if category:
+        items = Item.objects.filter(category=category)
+    else:
+        items = Item.objects.all()
+
     item = get_object_or_404(Item, pk=item_id)
     item_id = item.item_id
 
@@ -50,18 +54,8 @@ def item_detail(request, item_id):
         comment_content = request.POST.get('comment')
         comment = Comment(item_id=item, content=comment_content)
         comment.save()
-        return redirect('posts:item_detail', item_id=item_id)
-
-    comments = Comment.objects.filter(item_id=item)
-
-    return render(request, 'item_detail.html', {'item': item, 'comments': comments, 'item_id': item_id})
-
-
-def item_list(request, category=None):
-    if category:
-        items = Item.objects.filter(category=category)
+        comments = Comment.objects.filter(item_id=item)
     else:
-        items = Item.objects.all()
-    return render(request, 'item_list.html', {'items': items})
+        comments = Comment.objects.filter(item_id=item)
 
-
+    return render(request, 'item_detail.html', {'items': items, 'item': item, 'comments': comments, 'item_id': item_id})
