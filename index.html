@@ -88,7 +88,8 @@
 		<div class="test-container">
 			<div class="popup-page">
 				<div class="close-btn">&times;</div>
-				<h1 id="popup-title">title</Title></h1>
+				<h1 id="popup-title">title</Title>
+				</h1>
 				<p id="popup-contents">contents</p>
 			</div>
 		</div>
@@ -125,28 +126,35 @@
 				<div class="campaign-form-add">+</div>
 				<div class="campaign-form-close">&times;</div>
 				<span class="campaign-form-title">新增活動</span>
-
-				<span class="form-text">活動名稱</span>
-				<input type="text" id="campaign-form-name" name="campaign-form-name">
-
-				<span class="form-text">活動日期</span>
-				<input type="date" id="campaign-form-date" name="campaign-form-date">
-
-				<span class="form-text">活動時間</span>
-				<input type="time" id="campaign-form-time" name="campaign-form-time">
-
-				<span class="form-text">活動地點</span>
-				<input type="text" id="campaign-form-loca" name="campaign-form-loca">
-
-				<span class="form-text">活動描述（可略）</span>
-				<input type="text" id="campaign-form-desc" name="campaign-form-desc" class="campaign-form-desc">
+				<form action="" style="background: none;">
+					<label for="name-input">
+						<span class="form-text">活動名稱</span>
+						<input type="text" id="name-input" name="campaign-form-name">
+					</label>
+					<label for="date-input">
+						<span class="form-text">活動日期</span>
+						<input type="date" id="date-input" name="campaign-form-date">
+					</label>
+					<label for="time-input">
+						<span class="form-text">活動時間</span>
+						<input type="time" id="time-input" name="campaign-form-time">
+					</label>
+					<label for="loca-input">
+						<span class="form-text">活動地點</span>
+						<input type="text" id="loca-input" name="campaign-form-loca">
+					</label>
+					<label for="desc-input">
+						<span class="form-text">活動描述（可略）</span>
+						<input type="text" id="desc-input" name="campaign-form-desc" class="campaign-form-desc">
+					</label>
+				</form>
 			</div>
 			<div class="campaign-form-overlay"></div>
 		</div>
 	</section>
 
 	<script src="scripts/script.js"></script>
-	<script src="scripts/campaign.js"></script>
+	<script src="scripts/campaign.js" defer></script>
 </body>
 
 </html>

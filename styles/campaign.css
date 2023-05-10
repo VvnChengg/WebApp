@@ -1,6 +1,6 @@
 /* campaign block */
 .campaign-container {
-    height: 120vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
 }
@@ -25,10 +25,23 @@
 
 .campaign-row {
     display: flex;
-    position: relative;
+    /* position: relative; */
+}
+
+.campaign-shelve {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    overflow: hidden;
 }
 
 .campaign-col {
+    display: flex;
+    justify-content: center;
+    position: relative;
     width: 200px;
     height: 280px;
     background-color: cadetblue;
@@ -114,24 +127,28 @@
 
 /* campagin form */
 .campaign-form-container {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     left: 38%;
     width: 275px;   
     transform: translate(0%, -5%) scale(0);
     background-color: aliceblue;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 30px 40px;
+    padding: 32px 40px 44px 40px;
     border-radius: 35px;
-    z-index: 100;
-
-    display: flex;
-    flex-direction: column;
+    z-index: 10;   
 }
 
 .form-active {
     left: 38%;
     width: 275px; 
     transform: translate(0%, -5%) scale(1);
+}
+
+.campaign-form-container label {
+    background: none;
+    margin: 5px;
 }
 
 .campaign-form-container .campaign-form-add {
@@ -172,7 +189,6 @@
 .campaign-form-container .form-text {
     font-size: 12px;
     font-weight: 700;
-    margin: 10px 0 5px 0;
 }
 
 .campaign-form-container input {

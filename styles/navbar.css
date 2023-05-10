@@ -43,6 +43,7 @@
     justify-content: center;
     border-bottom: 1px solid #e3e3e3;
     position: sticky;
+    z-index: 100;
     top: 0;
 }
 
@@ -103,12 +104,15 @@
     background: #f8ede8;
     text-align: left;
     padding-left: 65px;
-    /* z-index: 3; */
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s linear, 
+                opacity 0.2s linear;
 }
 
 .search-active {
-    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 .show-search form {
@@ -124,10 +128,8 @@
     height: 50px;
     line-height: 28px;
     background: none;
-    /* font-weight: normal; */
     letter-spacing: 1px;
     font-size: 13px;
     outline: none;
-
     font-weight: bold;
 }
