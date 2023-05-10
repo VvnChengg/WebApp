@@ -12,7 +12,7 @@
 }
 
 .campaign-div .campaign-title {
-    margin: 15px 55px;
+    margin: 25px 55px;
     font-size: 30px;
     font-weight: bolder;
 }
@@ -36,6 +36,7 @@
 
     width: 100%;
     overflow: hidden;
+    transition: 0.5s;
 }
 
 .campaign-col {
@@ -51,17 +52,24 @@
 }
 
 .campaign-add {
-    /* width: 190px;
-    height: 270px; */
+    padding: 2px;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.campaign-add:hover {
     padding: 2px;
     background: rgba(255, 255, 255, 0.8);
-    /* filter: blur(5px); */
-    /* border: 3px dashed #313131; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 
 .campaign-add .add-icon {
     padding: 20px 20px;
@@ -73,8 +81,15 @@
     justify-content: center;
     font-size: 30px;
     font-weight: bold;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: 0.3s
 }
+
+.campaign-add:hover .add-icon {
+    background-color: #f8ede8;
+}
+
 
 .campaign-add span {
     background: none;
@@ -115,8 +130,23 @@
     width: 100px;
     padding: 5px 10px;
     display: flex;
+    color: #fff;
     justify-content: center;
-    border-radius: 15px;
+    border: 1.5px solid #fff;
+    border-radius: 20px;
+    background-color: cadetblue;
+    transition: 0.3s
+}
+
+.campaign-register:hover {
+    color: #313131;
+    background-color: #fff;
+}
+
+.campaign-register.is-registed {
+    color: #fff;
+    background-color: burlywood;
+    border: 1.5px solid burlywood;
 }
 
 .campaign-contents .campaign-register span {
@@ -157,7 +187,7 @@
     height: 25px;
     border-radius: 20px;
     right: 75px;
-    top: 30px;
+    top: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,7 +200,7 @@
     height: 25px;
     border-radius: 20px;
     right: 35px;
-    top: 30px;
+    top: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,6 +214,7 @@
 .campaign-container .campaign-form-title {
     font-size: 25px;
     font-weight: bold;
+    margin-bottom: 8px;
 }
 
 .campaign-form-container .form-text {
@@ -201,6 +232,7 @@
     font-size: 10px;
     outline: none;
     padding: 0 5px;
+    margin-bottom: 5px;
 }
 
 .campaign-form-container .campaign-form-desc {

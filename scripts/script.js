@@ -147,3 +147,11 @@ search_btn.onclick = function () {
     }
     console.log(search_flg)
 }
+
+
+// article image parallax test 
+window.addEventListener('scroll', () => {
+    const scrollPositionY = window.pageYOffset;
+    const backgorund = document.querySelector('.article-background');
+    backgorund.style.transform = `translateY(${scrollPositionY * 0.3 - 100}px)`
+})

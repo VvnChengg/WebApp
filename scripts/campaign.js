@@ -29,14 +29,12 @@ submit_btn.addEventListener('click', (event) => {
         'desc': event_desc
     })
 
-    
-
     document.querySelector('.campaign-form-container').classList.remove('form-active');
     document.querySelector('.campaign-form-overlay').classList.remove('overlay-active');
-    
+
 });
 
-function create_campaign (event) {
+function create_campaign(event) {
     document.querySelector('.campaign-row').insertAdjacentHTML(
         'beforeend',
         `<div class="campaign-col">
@@ -54,7 +52,7 @@ function create_campaign (event) {
 
 // campaign dragger
 const campaign_shelve = document.querySelector('.campaign-shelve');
-let isDragStart = false, prePageX, preScrollLeft; 
+let isDragStart = false, prePageX, preScrollLeft;
 
 campaign_shelve.addEventListener('mousedown', (event) => {
     isDragStart = true;
@@ -73,5 +71,18 @@ campaign_shelve.addEventListener('mousemove', (event) => {
     campaign_shelve.scrollLeft = preScrollLeft - positionDiff;
 });
 
+// campaign register 
 
-
+let registed_flag = false;
+document.querySelector('.campaign-register').addEventListener('click', () => {
+    if (registed_flag === false) {
+        document.querySelector('.campaign-register').classList.add('is-registed');
+        document.querySelector('.campaign-register').innerHTML = '<span>已報名</span>';
+        registed_flag = true;
+    }
+    else {
+        document.querySelector('.campaign-register').classList.remove('is-registed');
+        document.querySelector('.campaign-register').innerHTML = '<span>報名活動</span>';
+        registed_flag = false;
+    }
+})
