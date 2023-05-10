@@ -92,11 +92,21 @@
     <!-- 商品類別 -->
     <div class="categories">
         <ul>
-          <li class="active"><a href="#">全部</a></li>
-          <li><a href="#">衣物</a></li>
-          <li><a href="#">鞋子</a></li>
-          <li><a href="#">3C</a></li>
-          <li><a href="#">其他</a></li>
+            <li class="{% if not category %}active{% endif %}">
+                <a href="{% url 'item_list' %}" onclick="location.href=this.href;">全部</a>
+            </li>
+            <li class="{% if category == '衣物' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '衣物' %}" onclick="location.href=this.href;">衣物</a>
+            </li>
+            <li class="{% if category == '鞋子' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '鞋子' %}" onclick="location.href=this.href;">鞋子</a>
+            </li>
+            <li class="{% if category == '3C' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '3C' %}" onclick="location.href=this.href;">3C</a>
+            </li>
+            <li class="{% if category == '其他' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '其他' %}" onclick="location.href=this.href;">其他</a>
+            </li>
         </ul>
     </div>
 
@@ -109,7 +119,7 @@
                 <div class="item-text-container">
                     <h3>{{ item.name }}</h3>
                     <p>＄{{ item.price }}</p>
-                    <button class="item-details-button">詳細資訊</button>
+                    <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
                 </div>
                 {% comment %} <div class="item-details-wrapper"> {% endcomment %}
                     <div class="item-details-container">
@@ -125,17 +135,36 @@
                             <p>交易方式：{{ item.transaction_type }}</p>
                             <p>面交地點：{{ item.transaction_location }}</p>
                             <p>商品狀況：{{ item.condition }}</p>
-    
-                            <button class="close-button">X</button>
                         </div>
+
+                        <label>留言板：</label>
+                        <form method="post" action="{% url 'item_detail' item_id=item.pk %}" id="comment-form">
+                            {% csrf_token %}
+                            <textarea id="comment-input" name="comment" rows="5" cols="50"></textarea>
+                            <br>
+                            <button type="submit" id="comment-submit-button">留言</button>
+                        </form>
+                    
+                        <div class="comments">
+                            {% for comment in comments %}
+                                <div class="comment">
+                                    <p>{{ comment.content }}</p>
+                                    <p>{{ comment.created_at }}</p>
+                                </div>
+                            {% empty %}
+                                <p>目前還沒有。</p>
+                            {% endfor %}
+                        </div>
+                    
+                        <button class="close-button">X</button>
+                        
                     </div>
                 {% comment %} </div> {% endcomment %}
             </div>
         {% endfor %}
     </div>
     
-    <script src="{% static 'platform.js' %}"></script>
     <script src="{% static 'sell-item.js' %}"></script>
-    <script src="{% static 'item-details.js' %}?v=1"></script>
+    <script src="{% static 'item-detail.js' %}?v=1"></script>
 </body>
 </html>

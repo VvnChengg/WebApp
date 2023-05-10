@@ -12,3 +12,8 @@ class Item(models.Model):
     category = models.CharField(max_length=20)
     condition = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/')
+
+class Comment(models.Model):
+    item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
