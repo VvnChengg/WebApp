@@ -5,88 +5,61 @@
 <head>
   <meta charset="UTF-8">
   <title>My Web App</title>
-  <link rel="stylesheet" href="{% static 'sell-platform.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=1">
+
 </head>
-<body style="background-color: #faeccd;">
+<body>
     
-    <header class="header-container1">
-        <div class="header-links1">
-            <a href="#" class="header-link1" style="margin-left: 40px;">語言</a>
-            <a href="#" class="header-link1">登入</a>
-            <a href="#" class="header-link1">註冊</a>
-        </div>
-    </header>
-    <header class="header-container2">
+    <!-- top bar container -->
+	<div class="top-bar-container">
+		<div class="top-bar-menu container">
+			<a href="#">
+				<img src="{% static './images/language.png' %}" alt="">
+				<div>語言</div>
+			</a>
+			<a href="http://127.0.0.1:8000/">
+				<img src="{% static './images/person.png' %}" alt="">
+				<div>會員登入</div>
+			</a>
+		</div>
+	</div>
 
-        <h1 class="header-logo">出清台大2.0</h1>
-        <div class="header-links2">
-            <a href="../homePage/mainPage.html" class="header-link2" style="margin-left: 150px;">主頁</a>
-            <a href="#" class="header-link2">活動區</a>
-            <a href="#" class="header-link2">二手物品交易區</a>
-            <a href="#" class="header-link2" style="margin-right: 190px;">聊天室</a>
-        </div>
-        <div class="header-links1">
-            <div class="search-bar">
-                <input type="text" placeholder="搜尋...">
-            </div>
-        </div>
-    </div>
-    </header>
-
-    <hr style="border: 0.1px solid black; margin: 0;">
+    <!-- nav bar container -->
+	<div class="nav-bar-container">
+		<div class="nav-bar-menu container">
+			<div class="menu">
+				<ul>
+					<li class="menu-item"><a href="#">首頁</a></li>
+					<li class="menu-item"><a href="#">二手市集</a></li>
+					<li class="menu-item"><a href="#article">專欄文章</a></li>
+					<li class="menu-item"><a href="#campaign">活動</a></li>
+				</ul>
+			</div>
+			<div class="top-search">
+				<a><img id="top-search-btn" src="{% static './images/search.png' %}" alt=""></a>
+			</div>
+			<div class="show-search" id="show-search">
+				<form role="search" method="get" id="searchform" action="">
+					<div><input type="text" class="search-input" placeholder="搜尋" name="s" id="s" /></div>
+				</form>
+			</div>
+		</div>
+	</div>
 
     <!-- 按鈕 -->
     <button id="sell-button">我要販賣物品</button>
-
-    <div id="sell-form">
-        <h2>販賣物品</h2>
-        <form method="post" action="{% url 'add_item' %}" enctype="multipart/form-data"> 
-            {% csrf_token %}
-            <label>物品名稱：
-                <input type="text" id="item-name" name="name" required>
-            </label>
-
-            <label>價格：
-                <input type="number" id="item-price" name="price" required>
-            </label>
-
-            <label>交易方式：</label>
-            <select id="item-transaction" name="transaction_type">
-                <option value="僅面交">僅面交</option>
-                <option value="僅寄送">僅寄送</option>
-                <option value="面交、寄送皆可">面交、寄送皆可</option>
-            </select>
-
-            <label>面交地點：
-                <input type="text" id="item-location" name="transaction_location">
-            </label>
-
-            <label>數量：
-                <input type="number" id="item-quantity" name="quantity" required>
-            </label>
-
-            <label>分類：</label>
-            <select id="item-category" name="category">
-                <option value="衣物">衣物</option>
-                <option value="鞋子">鞋子</option>
-                <option value="3C">3C</option>
-                <option value="其他">其他</option>
-            </select>
-
-            <label>商品狀況：
-                <input type="text" id="item-condition" name="condition" required>
-            </label>
-
-            <label>上傳圖片：
-                <input type="file" id="item-image" accept="image/*" name="image" required>
-            </label>
-
-            <div>
-            <button type="button" id="cancel-button">取消</button>
-            <button type="submit" id="sell-submit-button" value="Post">販賣</button>
-            </div>
-        </form>
-    </div>
+    <script>
+        const sellBtn = document.querySelector('#sell-button');
+        sellBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/sell';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
 
     
     <!-- 商品類別 -->
@@ -121,50 +94,24 @@
                     <p>＄{{ item.price }}</p>
                     <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
                 </div>
-                {% comment %} <div class="item-details-wrapper"> {% endcomment %}
-                    <div class="item-details-container" data-item-id="{{ item.item_id }}">
-                        <!-- 商品詳細資訊 -->
-                        <div class="item-details-image">
-                            <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-                        </div>
-                        <div class="item-details-text">
-                            <h2>{{ item.name }}</h3>
-                            <h3>＄{{ item.price }}</p>
-                            <p>數量：{{ item.quantity }}</p>
-                            <p>分類：{{ item.category }}</p>
-                            <p>交易方式：{{ item.transaction_type }}</p>
-                            <p>面交地點：{{ item.transaction_location }}</p>
-                            <p>商品狀況：{{ item.condition }}</p>
-                        </div>
-
-                        <label>留言板：</label>
-                        <form method="post" action="{% url 'item_detail' item_id=item.pk %}" id="comment-form">
-                            {% csrf_token %}
-                            <textarea id="comment-input" name="comment" rows="5" cols="50"></textarea>
-                            <br>
-                            <button type="submit" id="comment-submit-button">留言</button>
-                        </form>
-                    
-                        <div class="comments">
-                            {% for comment in comments %}
-                                <div class="comment">
-                                    <p>{{ comment.content }}</p>
-                                    <p>{{ comment.created_at }}</p>
-                                </div>
-                            {% empty %}
-                                <p>目前還沒有。</p>
-                            {% endfor %}
-                        </div>
-                    
-                        <button class="close-button">X</button>
-                        
-                    </div>
-                {% comment %} </div> {% endcomment %}
             </div>
         {% endfor %}
+        <script>
+            var isAlertShown = false;
+            var detailButtons = document.querySelectorAll('.item-details-button');
+            detailButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    {% if not request.user.is_authenticated and not isAlertShown%}
+                        alert("請先登入");
+                        isAlertShown = true;
+                    {% else %}
+                        const itemId = button.dataset.itemId;
+                        const url = '/posts/item/' + itemId;
+                        window.location.href = url;
+                    {% endif %}
+                });
+              });    
+        </script>
     </div>
-    
-    <script src="{% static 'sell-item.js' %}"></script>
-    <script src="{% static 'item-detail-for-index.js' %}?v=1"></script>
 </body>
 </html>

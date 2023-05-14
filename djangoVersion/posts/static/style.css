@@ -1,85 +1,18 @@
-.header-container1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    width: 100%;
-    /* padding: 0 20px; */
-    background-color: #e7e7e7;
-    color: #000000;
-  }
+@charset "UTF-8";
 
-.header-container2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-    width: 100%;
-    /* padding: 0 20px; */
-    /* background-color: #fbe5c7; */
-    color: #000000;
-}
-  
-.header-links1 {
-    align-items: center;
-    position: absolute;
-    right: 30px;
-    width: 200px;
-    max-width: 1200px;
+* {
+    margin: 0;
+    padding: 0;
+    /* background-color: #f8ede8; */
+    scroll-behavior: smooth;
 }
 
-.header-links2 {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    width: 50%;
-    padding: 10px;
-}
-  
-.header-link1 {
-    margin-left: 20px;
-    color: #000000;
-    text-decoration: none;
+body {
+  background-color: #f8ede8;
 }
 
-.header-link2 {
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    margin-left: 10px;
-    color: #000000;
-    font-weight: bold;
-    text-decoration: none;
-    text-align: center;
-}
-  
-.header-link:hover {
-    text-decoration: underline;
-}
-  
-.header-logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-left: 30px;
-}
-
-.search-bar input[type="text"] {
-    display: flex;
-    align-items: center;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    background-color: #f8f8f8;
-    font-size: 12px;
-    color: #333;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-    margin-right: 30px;
-}
-  
-.search-bar input[type="text"]:focus {
-    outline: none;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+.container {
+    width: 1000px;
 }
 
 .categories {
@@ -89,7 +22,7 @@
     border-radius: 5px;
     float: left; /* 讓區塊靠左 */
     margin-right: 20px; /* 設置右邊間距 */
-    background-color: white;
+    background-color: rgb(255, 201, 154);
     height: 100%;
     display: flex;
   }
@@ -122,10 +55,6 @@
   }
 
   /* 販賣物品表單 */
-/* 隱藏表單 */
-#sell-form {
-    display: none;
-  }
   
   /* 按鈕樣式 */
   #sell-button {
@@ -144,6 +73,7 @@
   
   /* 表單樣式 */
   #sell-form {
+    display: none;
     font-family: Arial, sans-serif;
     width: 400px;
     margin: 0 auto;
@@ -206,6 +136,7 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
+    background-color: white;
   }
 
 

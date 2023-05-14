@@ -5,35 +5,46 @@
 <head>
   <meta charset="UTF-8">
   <title>My Web App</title>
-  <link rel="stylesheet" href="{% static 'sell-platform.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'style.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=1">
 </head>
-<body style="background-color: #faeccd;">
+<body>
     
-    <header class="header-container1">
-        <div class="header-links1">
-            <a href="#" class="header-link1" style="margin-left: 40px;">語言</a>
-            <a href="#" class="header-link1">登入</a>
-            <a href="#" class="header-link1">註冊</a>
-        </div>
-    </header>
-    <header class="header-container2">
+    <!-- top bar container -->
+	<div class="top-bar-container">
+		<div class="top-bar-menu container">
+			<a href="#">
+				<img src="{% static './images/language.png' %}" alt="">
+				<div>語言</div>
+			</a>
+			<a href="http://127.0.0.1:8000/">
+				<img src="{% static './images/person.png' %}" alt="">
+				<div>會員登入</div>
+			</a>
+		</div>
+	</div>
 
-        <h1 class="header-logo">出清台大2.0</h1>
-        <div class="header-links2">
-            <a href="../homePage/mainPage.html" class="header-link2" style="margin-left: 150px;">主頁</a>
-            <a href="#" class="header-link2">活動區</a>
-            <a href="#" class="header-link2">二手物品交易區</a>
-            <a href="#" class="header-link2" style="margin-right: 190px;">聊天室</a>
-        </div>
-        <div class="header-links1">
-            <div class="search-bar">
-                <input type="text" placeholder="搜尋...">
-            </div>
-        </div>
-    </div>
-    </header>
-
-    <hr style="border: 0.1px solid black; margin: 0;">
+    <!-- nav bar container -->
+	<div class="nav-bar-container">
+		<div class="nav-bar-menu container">
+			<div class="menu">
+				<ul>
+					<li class="menu-item"><a href="#">首頁</a></li>
+					<li class="menu-item"><a href="#">二手市集</a></li>
+					<li class="menu-item"><a href="#article">專欄文章</a></li>
+					<li class="menu-item"><a href="#campaign">活動</a></li>
+				</ul>
+			</div>
+			<div class="top-search">
+				<a><img id="top-search-btn" src="{% static './images/search.png' %}" alt=""></a>
+			</div>
+			<div class="show-search" id="show-search">
+				<form role="search" method="get" id="searchform" action="">
+					<div><input type="text" class="search-input" placeholder="搜尋" name="s" id="s" /></div>
+				</form>
+			</div>
+		</div>
+	</div>
 
     <!-- 按鈕 -->
     <button id="sell-button">我要販賣物品</button>

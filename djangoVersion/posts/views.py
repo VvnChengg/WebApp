@@ -1,29 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse
 from django.http import HttpResponseRedirect, JsonResponse
 from .models import Item, Comment
 
 # Create your views here.
 def index(request, category=None):
-    if request.method == "POST":
-        item = Item()
-        item.name = request.POST.get('name')
-        item.price = request.POST.get('price')
-        item.transaction_type = request.POST.get('transaction_type')
-        item.transaction_location = request.POST.get('transaction_location', '')
-        item.quantity = request.POST.get('quantity')
-        item.category = request.POST.get('category')
-        item.condition = request.POST.get('condition')
-        item.image = request.FILES.get('image')
-        item.save()
-
     if category:
         items = Item.objects.filter(category=category)
     else:
         items = Item.objects.all()
     return render(request, 'index.html', {'items': items})
 
-def add_item(request):
+# 新增商品
+def add_item(request, category=None):
     if request.method == 'POST':
         item = Item()
         item.name = request.POST.get('name')
@@ -35,10 +25,13 @@ def add_item(request):
         item.condition = request.POST.get('condition')
         item.image = request.FILES.get('image')
         item.save()
-
-        return HttpResponseRedirect('/posts')
+    
+    if category:
+        items = Item.objects.filter(category=category)
     else:
-        return render(request, 'index.html')
+        items = Item.objects.all()
+
+    return render(request, 'sell_item.html', {'items': items})
 
 
 def item_detail(request, item_id, category=None):
