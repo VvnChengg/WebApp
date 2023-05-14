@@ -40,7 +40,7 @@ def login_attempt(request):
             return redirect('/accounts/login')
         
         login(request , user)
-        return redirect('/')
+        return redirect('/posts')
 
     return render(request , 'login.html')
 
