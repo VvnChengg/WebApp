@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Item(models.Model):
     item_id = models.AutoField(auto_created=True, primary_key=True)
-    # user_id = models.IntegerField()
+    username = models.CharField(max_length=100, default='visitor')
     name = models.CharField(max_length=100)
     price = models.IntegerField()
     transaction_type = models.CharField(max_length=20)
@@ -15,5 +15,6 @@ class Item(models.Model):
 
 class Comment(models.Model):
     item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
+    username = models.CharField(max_length=100, default='visitor')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

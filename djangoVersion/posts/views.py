@@ -16,6 +16,7 @@ def index(request, category=None):
 def add_item(request, category=None):
     if request.method == 'POST':
         item = Item()
+        item.username = request.user.username
         item.name = request.POST.get('name')
         item.price = request.POST.get('price')
         item.transaction_type = request.POST.get('transaction_type')
@@ -44,8 +45,9 @@ def item_detail(request, item_id, category=None):
     item_id = item.item_id
 
     if request.method == 'POST':
+        comment_username = request.user.username
         comment_content = request.POST.get('comment')
-        comment = Comment(item_id=item, content=comment_content)
+        comment = Comment(item_id=item, username=comment_username, content=comment_content)
         comment.save()
         comments = Comment.objects.filter(item_id=item)
     else:
