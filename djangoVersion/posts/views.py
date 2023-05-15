@@ -54,3 +54,15 @@ def item_detail(request, item_id, category=None):
         comments = Comment.objects.filter(item_id=item)
 
     return render(request, 'item_detail.html', {'items': items, 'item': item, 'comments': comments, 'item_id': item_id})
+
+def my_item(request, category=None):
+    if category:
+        items = Item.objects.filter(category=category, username=request.user.username)
+    else:
+        items = Item.objects.filter(username=request.user.username)
+    return render(request, 'my_item.html', {'items': items})
+
+def delete_item(request, item_id):
+    item = Item.objects.get(item_id=item_id)
+    item.delete()
+    return redirect('/posts/my-item')

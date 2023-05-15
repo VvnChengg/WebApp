@@ -220,22 +220,6 @@ body {
     text-align: left;
   }
 
-  
-  .newItem button {
-    background-color: #ff7f50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  .newItem button:hover {
-    background-color: #ff6347;
-  }
-
   #item-container {
     display: flex;
     flex-wrap: wrap;
@@ -338,4 +322,66 @@ body {
 .comment-time{
   font-size: 12px;
   color: #888;
+}
+
+#my-item-button {
+  background-color: #579dff;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  width: 40%;
+  cursor: pointer;
+}
+
+
+.close-button {
+  background-color: #ff7f50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.item-details-button {
+  background-color: #ff7f50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.item-details-button:hover {
+  background-color: #ff6347;
+}
+
+.delete-item-button {
+  font-size: 11px;
+  text-decoration: none;
+  background-color: #808080;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
 }

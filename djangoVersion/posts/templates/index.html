@@ -5,8 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <title>My Web App</title>
-  <link rel="stylesheet" href="{% static 'style.css' %}?v=1">
-  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'style.css' %}?v=3">
+  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=3">
 
 </head>
 <body>
@@ -61,6 +61,20 @@
         });        
     </script>
 
+    <button id="my-item-button">我正在販賣的物品</button>
+    <script>
+        const myItemBtn = document.querySelector('#my-item-button');
+        myItemBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/my-item';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+    
+
     
     <!-- 商品類別 -->
     <div class="categories">
@@ -92,6 +106,8 @@
                 <div class="item-text-container">
                     <h3>{{ item.name }}</h3>
                     <p>＄{{ item.price }}</p>
+                </div>
+                <div class="button-container">
                     <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 {% load static %}
+{% csrf_token %}
 
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -7,6 +8,7 @@
   <title>My Web App</title>
   <link rel="stylesheet" href="{% static 'style.css' %}?v=3">
   <link rel="stylesheet" href="{% static 'navbar.css' %}?v=3">
+
 </head>
 <body>
     
@@ -48,6 +50,32 @@
 
     <!-- 按鈕 -->
     <button id="sell-button">我要販賣物品</button>
+    <script>
+        const sellBtn = document.querySelector('#sell-button');
+        sellBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/sell';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+
+    <button id="my-item-button">我正在販賣的物品</button>
+    <script>
+        const myItemBtn = document.querySelector('#my-item-button');
+        myItemBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/my-item';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+    
+
     
     <!-- 商品類別 -->
     <div class="categories">
@@ -82,51 +110,27 @@
                 </div>
                 <div class="button-container">
                     <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
+                    <a href="{% url 'delete_item' item.item_id %}" class="delete-item-button" data-item-id="{{ item.item_id }}" onclick="return confirm('確定要刪除 {{ item.name }} 嗎？')">刪除物品</a>
                 </div>
-                {% comment %} <div class="item-details-wrapper"> {% endcomment %}
-                    <div class="item-details-container" data-item-id="{{ item.item_id }}">
-                        <!-- 商品詳細資訊 -->
-                        <div class="item-details-image">
-                            <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-                        </div>
-                        <div class="item-details-text">
-                            <h2>{{ item.name }}</h3>
-                            <h3>＄{{ item.price }}</p>
-                            <p>數量：{{ item.quantity }}</p>
-                            <p>分類：{{ item.category }}</p>
-                            <p>交易方式：{{ item.transaction_type }}</p>
-                            <p>面交地點：{{ item.transaction_location }}</p>
-                            <p>商品狀況：{{ item.condition }}</p>
-                        </div>
-
-                        <label>留言板：</label>
-                        <form method="post" action="{% url 'item_detail' item_id=item.pk %}" id="comment-form">
-                            {% csrf_token %}
-                            <textarea id="comment-input" name="comment" rows="5" cols="50"></textarea>
-                            <br>
-                            <button type="submit" id="comment-submit-button">留言</button>
-                        </form>
-                    
-                        <div class="comments">
-                            {% for comment in comments %}
-                                <div class="comment">
-                                    <p class="comment-content">{{ comment.username }}</p>
-                                    <p class="comment-content">{{ comment.content }}</p>
-                                    <p class="comment-time">{{ comment.created_at }}</p>
-                                </div>
-                            {% empty %}
-                                <p>目前還沒有留言。</p>
-                            {% endfor %}
-                        </div>
-                    
-                        <button class="close-button" data-item-id="{{ item.item_id }}">X</button>
-                        
-                    </div>
-                {% comment %} </div> {% endcomment %}
             </div>
         {% endfor %}
+        <script>
+            var isAlertShown = false;
+            var detailButtons = document.querySelectorAll('.item-details-button');
+            var deleteButtons = document.querySelectorAll('.delete-item-button');
+            detailButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    {% if not request.user.is_authenticated and not isAlertShown%}
+                        alert("請先登入");
+                        isAlertShown = true;
+                    {% else %}
+                        const itemId = button.dataset.itemId;
+                        const url = '/posts/item/' + itemId;
+                        window.location.href = url;
+                    {% endif %}
+                });
+            });
+        </script>
     </div>
-    
-    <script src="{% static 'item-detail.js' %}"></script>
 </body>
 </html>
