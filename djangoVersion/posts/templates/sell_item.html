@@ -5,8 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <title>My Web App</title>
-  <link rel="stylesheet" href="{% static 'style.css' %}?v=1">
-  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'style.css' %}?v=3">
+  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=3">
 
 </head>
 <body>
@@ -49,6 +49,30 @@
 
     <!-- 按鈕 -->
     <button id="sell-button">我要販賣物品</button>
+    <script>
+        const sellBtn = document.querySelector('#sell-button');
+        sellBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/sell';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+
+    <button id="my-item-button">我正在販賣的物品</button>
+    <script>
+        const myItemBtn = document.querySelector('#my-item-button');
+        myItemBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/my-item';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
 
     <div id="sell-form">
         <h2>販賣物品</h2>
@@ -131,12 +155,14 @@
                 <div class="item-text-container">
                     <h3>{{ item.name }}</h3>
                     <p>＄{{ item.price }}</p>
+                </div>
+                <div class="button-container">
                     <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
                 </div>
             </div>
         {% endfor %}
     </div>
     
-    <script src="{% static 'sell-item.js' %}?v=1"></script>
+    <script src="{% static 'sell-item.js' %}?v=3"></script>
 </body>
 </html>

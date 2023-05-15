@@ -29,7 +29,7 @@ cancelBtn.addEventListener('click', () => {
 
 
 // 提交表單時，建立一個新的商品並顯示在網頁上
-sellForm.addEventListener("submit", (event) => {
+submitBtn.addEventListener("submit", (event) => {
     sellForm.style.display = "none";
     window.location.href = 'http://127.0.0.1:8000/posts/';
 });

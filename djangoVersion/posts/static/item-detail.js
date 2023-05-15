@@ -6,7 +6,6 @@ itemDetailsContainer.style.display = 'block';
 
 var closeButton = document.querySelector(`.close-button[data-item-id="${itemId}"]`);
 
-
 closeButton.addEventListener('click', function() {
   itemDetailsContainer.style.display = 'none';
   var url = new URL(window.location.href);

@@ -87,6 +87,8 @@ body {
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-height: 70%;
+    overflow-y: scroll;
   }
   
   #sell-form h2 {
@@ -190,18 +192,19 @@ body {
 
 /* 商品外觀 */
 .newItem {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
-    width: 18%;
-    height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  width: 18%;
+  height: 300px;
+  min-width: 150px;
   }
   
   .newItem:hover {
@@ -267,39 +270,53 @@ body {
   padding: 20px;
   border: 1px solid #888;
   width: 400px;
+  max-height: 70%;
+  overflow-y: scroll;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+.item-details-image {
+  flex: 0 0 40%;
+  height: 300px;
+  padding: 20px;
 }
 
-.item-details-container .item-details-image {
-  width: 50%;
-  text-align: center;
-  align-items: center;
-  margin-bottom: 20px;
+.item-details-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.item-details-container .item-details-image img {
-  max-width: 100%;
-  text-align: center;
-  align-items: center;
+.item-details-text {
+  flex: 1;
 }
 
-.item-details-container .item-details-text {
-  font-size: 18px;
-}
-
-.item-details-container .item-details-text h2 {
-  font-size: 28px;
-}
-
-.item-details-container .item-details-text h3{
+.item-details-text h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
   margin-bottom: 10px;
-  font-size: 24px;
   color: #ff6347;
 }
 
-.item-details-container .item-details-text p {
-  margin-bottom: 5px;
-  font-size: 14px;
-  color: #888;
+.item-details-text h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.item-details-text p {
+  font-size: 1rem;
+  margin: 0;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: gray ;
+}
+
+.item-details-text p:last-of-type {
+  margin-bottom: 0;
 }
 
 .item-details-container .close-button { 
@@ -314,15 +331,93 @@ body {
   color: white;
 }
 
-.comment-content{
-  font-size: 16px;
-  color: black;
+/* 留言板樣式 */
+#comment-form {
+  margin-top: 20px;
 }
 
-.comment-time{
-  font-size: 12px;
-  color: #888;
+#comment-form label {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
+
+#comment-form textarea {
+  display: block;
+  width: 90%;
+  height: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+#comment-form button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#comment-form button[type="submit"]:hover {
+  background-color: #0069d9;
+}
+
+
+.comments {
+  margin-top: 20px;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.comment-user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-username {
+  font-weight: bold;
+}
+
+.comment-time {
+  font-size: 12px;
+  color: gray;
+  margin: 0;
+}
+
+.comment-content {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  flex: 1;
+  line-height: 1.5;
+}
+
 
 #my-item-button {
   background-color: #579dff;

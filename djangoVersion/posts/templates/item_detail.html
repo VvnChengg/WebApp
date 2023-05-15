@@ -48,6 +48,30 @@
 
     <!-- 按鈕 -->
     <button id="sell-button">我要販賣物品</button>
+    <script>
+        const sellBtn = document.querySelector('#sell-button');
+        sellBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/sell';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+
+    <button id="my-item-button">我正在販賣的物品</button>
+    <script>
+        const myItemBtn = document.querySelector('#my-item-button');
+        myItemBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/my-item';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
     
     <!-- 商品類別 -->
     <div class="categories">
@@ -83,47 +107,53 @@
                 <div class="button-container">
                     <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
                 </div>
-                {% comment %} <div class="item-details-wrapper"> {% endcomment %}
-                    <div class="item-details-container" data-item-id="{{ item.item_id }}">
-                        <!-- 商品詳細資訊 -->
-                        <div class="item-details-image">
-                            <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-                        </div>
-                        <div class="item-details-text">
-                            <h2>{{ item.name }}</h3>
-                            <h3>＄{{ item.price }}</p>
-                            <p>數量：{{ item.quantity }}</p>
-                            <p>分類：{{ item.category }}</p>
-                            <p>交易方式：{{ item.transaction_type }}</p>
-                            <p>面交地點：{{ item.transaction_location }}</p>
-                            <p>商品狀況：{{ item.condition }}</p>
-                        </div>
-
-                        <label>留言板：</label>
-                        <form method="post" action="{% url 'item_detail' item_id=item.pk %}" id="comment-form">
-                            {% csrf_token %}
-                            <textarea id="comment-input" name="comment" rows="5" cols="50"></textarea>
-                            <br>
-                            <button type="submit" id="comment-submit-button">留言</button>
-                        </form>
-                    
-                        <div class="comments">
-                            {% for comment in comments %}
-                                <div class="comment">
-                                    <p class="comment-content">{{ comment.username }}</p>
-                                    <p class="comment-content">{{ comment.content }}</p>
-                                    <p class="comment-time">{{ comment.created_at }}</p>
-                                </div>
-                            {% empty %}
-                                <p>目前還沒有留言。</p>
-                            {% endfor %}
-                        </div>
-                    
-                        <button class="close-button" data-item-id="{{ item.item_id }}">X</button>
-                        
-                    </div>
-                {% comment %} </div> {% endcomment %}
             </div>
+            
+            {% comment %} <div class="item-details-wrapper"> {% endcomment %}
+            <div class="item-details-container" data-item-id="{{ item.item_id }}">
+                <!-- 商品詳細資訊 -->
+                <div class="item-details-image">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+                </div>
+                <div class="item-details-text">
+                    <h2>{{ item.name }}</h3>
+                    <h3>＄{{ item.price }}</p>
+                    <p>數量：{{ item.quantity }}</p>
+                    <p>分類：{{ item.category }}</p>
+                    <p>交易方式：{{ item.transaction_type }}</p>
+                    <p>面交地點：{{ item.transaction_location }}</p>
+                    <p>商品狀況：{{ item.condition }}</p>
+                </div>
+
+                <label>留言板：</label>
+                <form method="post" action="{% url 'item_detail' item_id=item.pk %}" id="comment-form">
+                    {% csrf_token %}
+                    <textarea id="comment-input" name="comment"></textarea>
+                    <br>
+                    <button type="submit" id="comment-submit-button">留言</button>
+                </form>
+            
+                <div class="comments">
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <div class="comment-user-info">
+                                <img src="{% static './images/profile-user.png' %}" alt="{{ comment.user.name }}" class="avatar">
+                                <div class="comment-user-details">
+                                <p class="comment-username">{{ comment.username }}</p>
+                                <p class="comment-content">{{ comment.content }}</p>
+                                </div>
+                            </div>
+                            <p class="comment-time">{{ comment.created_at }}</p>
+                        </div>
+                    {% empty %}
+                        <p>目前還沒有留言。</p>
+                    {% endfor %}
+                </div>
+            
+                <button class="close-button" data-item-id="{{ item.item_id }}">X</button>
+            </div>
+            {% comment %} </div> {% endcomment %}
+            
         {% endfor %}
     </div>
     

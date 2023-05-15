@@ -62,6 +62,8 @@ def my_item(request, category=None):
         items = Item.objects.filter(username=request.user.username)
     return render(request, 'my_item.html', {'items': items})
 
+
+# 刪除商品
 def delete_item(request, item_id):
     item = Item.objects.get(item_id=item_id)
     item.delete()
