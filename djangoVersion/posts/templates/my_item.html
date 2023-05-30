@@ -41,8 +41,8 @@
 				<a><img id="top-search-btn" src="{% static './images/search.png' %}" alt=""></a>
 			</div>
 			<div class="show-search" id="show-search">
-				<form role="search" method="get" id="searchform" action="">
-					<div><input type="text" class="search-input" placeholder="搜尋" name="s" id="s" /></div>
+				<form role="search" method="get" id="searchform" action="{% url 'search_item' %}">
+					<div><input type="text" class="search-input" placeholder="搜尋" name="keyword" id="s" value="{{ request.GET.keyword }}"/></div>
 				</form>
 			</div>
 		</div>
@@ -132,5 +132,6 @@
             });
         </script>
     </div>
+    <script src="{% static 'search-bar.js' %}?v=1"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@
   <title>My Web App</title>
   <link rel="stylesheet" href="{% static 'style.css' %}?v=3">
   <link rel="stylesheet" href="{% static 'navbar.css' %}?v=3">
+
 </head>
 <body>
     
@@ -39,8 +40,8 @@
 				<a><img id="top-search-btn" src="{% static './images/search.png' %}" alt=""></a>
 			</div>
 			<div class="show-search" id="show-search">
-				<form role="search" method="get" id="searchform" action="">
-					<div><input type="text" class="search-input" placeholder="搜尋" name="s" id="s" /></div>
+				<form role="search" method="get" id="searchform" action="{% url 'posts:search' %}">
+					<div><input type="text" class="search-input" placeholder="搜尋" name="keyword" id="s"/></div>
 				</form>
 			</div>
 		</div>
@@ -72,6 +73,8 @@
             {% endif %}
         });        
     </script>
+    
+
     
     <!-- 商品類別 -->
     <div class="categories">
@@ -108,55 +111,25 @@
                     <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
                 </div>
             </div>
-            
-            {% comment %} <div class="item-details-wrapper"> {% endcomment %}
-            <div class="item-details-container" data-item-id="{{ item.item_id }}">
-                <!-- 商品詳細資訊 -->
-                <div class="item-details-image">
-                    <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-                </div>
-                <div class="item-details-text">
-                    <h2>{{ item.name }}</h3>
-                    <h3>＄{{ item.price }}</p>
-                    <p>數量：{{ item.quantity }}</p>
-                    <p>分類：{{ item.category }}</p>
-                    <p>交易方式：{{ item.transaction_type }}</p>
-                    <p>面交地點：{{ item.transaction_location }}</p>
-                    <p>商品狀況：{{ item.condition }}</p>
-                </div>
-
-                <label>留言板：</label>
-                <form method="post" action="{% url 'item_detail' item_id=item.pk %}" id="comment-form">
-                    {% csrf_token %}
-                    <textarea id="comment-input" name="comment"></textarea>
-                    <br>
-                    <button type="submit" id="comment-submit-button">留言</button>
-                </form>
-            
-                <div class="comments">
-                    {% for comment in comments %}
-                        <div class="comment">
-                            <div class="comment-user-info">
-                                <img src="{% static './images/profile-user.png' %}" alt="{{ comment.user.name }}" class="avatar">
-                                <div class="comment-user-details">
-                                <p class="comment-username">{{ comment.username }}</p>
-                                <p class="comment-content">{{ comment.content }}</p>
-                                </div>
-                            </div>
-                            <p class="comment-time">{{ comment.created_at }}</p>
-                        </div>
-                    {% empty %}
-                        <p>目前還沒有留言。</p>
-                    {% endfor %}
-                </div>
-            
-                <button class="close-button" data-item-id="{{ item.item_id }}">X</button>
-            </div>
-            {% comment %} </div> {% endcomment %}
-            
         {% endfor %}
+        <script>
+            var isAlertShown = false;
+            var detailButtons = document.querySelectorAll('.item-details-button');
+            detailButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    {% if not request.user.is_authenticated and not isAlertShown%}
+                        alert("請先登入");
+                        isAlertShown = true;
+                    {% else %}
+                        const itemId = button.dataset.itemId;
+                        const url = '/posts/item/' + itemId;
+                        window.location.href = url;
+                    {% endif %}
+                });
+              });    
+        </script>
     </div>
-    
-    <script src="{% static 'item-detail.js' %}?v=2"></script>
+
+    <script src="{% static 'search-bar.js' %}?v=3"></script>
 </body>
 </html>

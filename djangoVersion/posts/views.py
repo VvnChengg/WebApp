@@ -68,3 +68,16 @@ def delete_item(request, item_id):
     item = Item.objects.get(item_id=item_id)
     item.delete()
     return redirect('/posts/my-item')
+
+# 查詢物品
+def search_item(request):
+    keyword = request.GET.get('keyword') # 獲取搜尋關鍵字的值
+    print(keyword)
+
+    # 根據關鍵字過濾物品清單
+    if keyword:
+        items = Item.objects.filter(name__icontains=keyword)
+    else:
+        items = Item.objects.all()
+
+    return render(request, 'index.html', {'items': items})
