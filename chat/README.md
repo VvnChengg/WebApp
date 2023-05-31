@@ -1,9 +1,8 @@
-# Updated:
-Chat room app functionality
+# What's new:
+updated Chat room app functionality
 
-### How to start
-> Start a virtualenv (optional)
-> Run the command `pip install -r /WebApp-master/djangoVersion/requirements.txt` to install all the packages
-> Then run `redis-server` to start redis
-> python3 manage.py runserver 8000
-
+### How to run the program in terminal
+1. Start a virtualenv (optional)
+2. Run the command `pip install -r /WebApp-master/djangoVersion/requirements.txt` to install all the packages
+3. Then run `redis-server` to start redis
+4. python3 manage.py runserver 8000
