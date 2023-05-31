@@ -32,8 +32,7 @@ def add_item(request, category=None):
     else:
         items = Item.objects.all()
 
-    username = item.username
-    return render(request, 'sell_item.html', {'items': items, 'username': username})
+    return render(request, 'sell_item.html', {'items': items})
 
 
 def item_detail(request, item_id, category=None):

@@ -13,3 +13,10 @@ class Message(models.Model):
     def __str__(self):
         return f'{self.sender}: {self.content}'
     
+
+class Room(models.Model):
+    
+    participants = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='rooms')
+
+    def __str__(self):
+        return self.participants
