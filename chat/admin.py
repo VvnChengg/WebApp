@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Message, Room
+from .models import Message, Room, RoomDetails
 
 
 class MessageAdmin(admin.ModelAdmin):
@@ -7,8 +7,12 @@ class MessageAdmin(admin.ModelAdmin):
 
 
 class RoomAdmin(admin.ModelAdmin):
-    list_display = ('member', 'room_name', 'room_description', 'room_capacity')
+    list_display = ('member', 'room_detail')
+
+class RoomDetailsAdmin(admin.ModelAdmin):
+    list_display = ('room_name', 'room_description', 'room_capacity')
 
 
 admin.site.register(Message, MessageAdmin)
 admin.site.register(Room, RoomAdmin)
+admin.site.register(RoomDetails, RoomDetailsAdmin)

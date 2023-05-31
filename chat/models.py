@@ -14,11 +14,17 @@ class Message(models.Model):
         return f'{self.sender}: {self.content}'
     
 
-class Room(models.Model):
-    member = models.ForeignKey(Profile, on_delete=models.CASCADE, default=1)
+class RoomDetails(models.Model):
     room_name = models.CharField(max_length=100)
     room_description = models.CharField(max_length=255)
     room_capacity = models.IntegerField(default=2)
 
     def __str__(self):
         return self.room_name
+
+class Room(models.Model):
+    member = models.ForeignKey(User, on_delete=models.CASCADE)
+    room_details = models.ForeignKey(RoomDetails, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.room_details.room_name

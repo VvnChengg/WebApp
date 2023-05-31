@@ -21,9 +21,12 @@ def room(request, username):
         profile_himself = Profile.objects.get(user=request.user)
         messages_received = Message.objects.filter(sender=profile, receiver=profile_himself)
         messages_sent = Message.objects.filter(sender=profile_himself, receiver=profile)
-        all_messages = messages_received | messages_sent
-        all_messages = all_messages.order_by('created_at')
+
+        all_messages = messages_received | messages_sent    # collect all messages
+        all_messages = all_messages.order_by('created_at')  # ordered by timestamp
         
+        
+
     except User.DoesNotExist:
         print('User does not exist')
         return False

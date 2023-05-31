@@ -26,8 +26,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         user_receiver = User.objects.get(username=receiver)
         profile_sender = Profile.objects.get(user=user_sender)
         profile_receiver = Profile.objects.get(user=user_receiver)
-        message = Message.objects.create(
-            sender=profile_sender, receiver=profile_receiver, content=content)
+        message = Message.objects.create(sender=profile_sender, receiver=profile_receiver, content=content)
         message.save()
         return message.created_at
 
