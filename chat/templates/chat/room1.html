@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat:{{ room_name }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" \
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'chatpage.css' %}">
+</head>
+<body>
+    <div class="top-bar-container top-bar-menu">
+	    <ul class="top-bar-container nav-item justify-content-center" style="display: flex; ">
+		    <li class="nav-item">
+                <a href="#" class="nav-link">語言</a>
+            </li>
+            <li class="nav-item">
+                <a href="http://127.0.0.1:8000/" class="nav-link">會員登入</a>
+            </li>
+	    </ul>
+    </div>
+    <div class="content-wrapper" style="position: center; max-width: 1200px; display: flex; flex-direction: column; margin: auto;">
+        <div class="title">
+            <h1 id="other-user" style="margin: auto; display:flex; width: 100%; background-color: green; border-radius: 2vh; padding: 0.4rem;">Chat:{{ room_name }}</h1>
+        </div>
+        <div class="wrapper row" style="width: 100%; margin: 0.2rem;">
+            <div class="col-sm-4">
+                User list ytd
+            </div>
+            <div class="col-sm-8" style="background-color: aquamarine; display: flex; flex-direction: column;">
+                <div class="userbar" style="width: 100%; background-color: aquamarine;">
+                    <div class="enduser">
+                        <span class="username">User: {{ username }}</span>
+                        <!-- <span class="lastonline">last online: {{ last_online }}</span> -->
+                    </div>
+                </div>
+                <div id="chat-log" style="min-height: 500px;">
+                    {% for message in messages %}
+                        <div class="message-container">
+                            <div>{{ message.content }}</div>
+                            <small>{{ message.created_at }}</small>
+                        </div>
+                    
+                    {% endfor %}
+                </div><br>
+                <div class="type-box" style="display: flex;">
+                    <input id="chat-message-input" class="form-control" type="text" size="100"><br>
+                    <input id="chat-message-submit" type="button" class="btn btn-primary" value="Send">
+                </div>
+             
+            </div>
+        </div>
+    </div>
+      
+    
+    
+    
+    {{ room_name|json_script:"room-name" }}
+    {{ request.user.username|json_script:"username" }}
+
+    <script>
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const username = JSON.parse(document.getElementById('username').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+
+            document.querySelector('#chat-message-input').value = '';
+            const chatLog = document.querySelector('#chat-log');
+            const newMessage = document.createElement('div');
+            newMessage.textContent = username + ' - ' + data.message;
+            chatLog.appendChild(newMessage);
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const messageInput = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'username': username,
+                'message': messageInput,
+            }));
+        };
+
+        
+    </script>
+</body>
+</html>

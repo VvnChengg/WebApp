@@ -1,0 +1,136 @@
+{% load static %}
+{% csrf_token %}
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>My Web App</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}?v=3">
+  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=3">
+
+</head>
+<body>
+    
+    <!-- top bar container -->
+	<div class="top-bar-container">
+		<div class="top-bar-menu container">
+			<a href="#">
+				<img src="{% static './images/language.png' %}" alt="">
+				<div>語言</div>
+			</a>
+			<a href="http://127.0.0.1:8000/">
+				<img src="{% static './images/person.png' %}" alt="">
+				<div>會員登入</div>
+			</a>
+		</div>
+	</div>
+
+    <!-- nav bar container -->
+	<div class="nav-bar-container">
+		<div class="nav-bar-menu container">
+			<div class="menu">
+				<ul>
+					<li class="menu-item"><a href="#">首頁</a></li>
+					<li class="menu-item"><a href="#">二手市集</a></li>
+					<li class="menu-item"><a href="#article">專欄文章</a></li>
+					<li class="menu-item"><a href="#campaign">活動</a></li>
+				</ul>
+			</div>
+			<div class="top-search">
+				<a><img id="top-search-btn" src="{% static './images/search.png' %}" alt=""></a>
+			</div>
+			<div class="show-search" id="show-search">
+				<form role="search" method="get" id="searchform" action="">
+					<div><input type="text" class="search-input" placeholder="搜尋" name="s" id="s" /></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+    <!-- 按鈕 -->
+    <button id="sell-button">我要販賣物品</button>
+    <script>
+        const sellBtn = document.querySelector('#sell-button');
+        sellBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/sell';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+
+    <button id="my-item-button">我正在販賣的物品</button>
+    <script>
+        const myItemBtn = document.querySelector('#my-item-button');
+        myItemBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/my-item';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+    
+
+    
+    <!-- 商品類別 -->
+    <div class="categories">
+        <ul>
+            <li class="{% if not category %}active{% endif %}">
+                <a href="{% url 'item_list' %}" onclick="location.href=this.href;">全部</a>
+            </li>
+            <li class="{% if category == '衣物' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '衣物' %}" onclick="location.href=this.href;">衣物</a>
+            </li>
+            <li class="{% if category == '鞋子' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '鞋子' %}" onclick="location.href=this.href;">鞋子</a>
+            </li>
+            <li class="{% if category == '3C' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '3C' %}" onclick="location.href=this.href;">3C</a>
+            </li>
+            <li class="{% if category == '其他' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '其他' %}" onclick="location.href=this.href;">其他</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="item-container">
+        {% for item in items %}
+            <div class="newItem">
+                <div class="item-image-container">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}"></img>
+                </div>
+                <div class="item-text-container">
+                    <h3>{{ item.name }}</h3>
+                    <p>＄{{ item.price }}</p>
+                </div>
+                <div class="button-container">
+                    <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
+                    <a href="{% url 'delete_item' item.item_id %}" class="delete-item-button" data-item-id="{{ item.item_id }}" onclick="return confirm('確定要刪除 {{ item.name }} 嗎？')">刪除物品</a>
+                </div>
+            </div>
+        {% endfor %}
+        <script>
+            var isAlertShown = false;
+            var detailButtons = document.querySelectorAll('.item-details-button');
+            var deleteButtons = document.querySelectorAll('.delete-item-button');
+            detailButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    {% if not request.user.is_authenticated and not isAlertShown%}
+                        alert("請先登入");
+                        isAlertShown = true;
+                    {% else %}
+                        const itemId = button.dataset.itemId;
+                        const url = '/posts/item/' + itemId;
+                        window.location.href = url;
+                    {% endif %}
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>
