@@ -23,8 +23,9 @@ class RoomDetails(models.Model):
         return self.room_name
 
 class Room(models.Model):
-    member = models.ForeignKey(User, on_delete=models.CASCADE)
-    room_details = models.ForeignKey(RoomDetails, on_delete=models.CASCADE)
+    member = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    room_details = models.ForeignKey(RoomDetails, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.room_details.room_name
+    
