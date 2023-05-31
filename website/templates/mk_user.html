@@ -1,0 +1,47 @@
+{% extends 'mk_base.html' %}
+
+{% block post %}
+<div class="post-container">
+  <div class='post-bulletin-board'>
+    <div class='post'>
+      <a href="{% url 'create_interface' %}">新增商品</a>
+    </div>
+    {% for item in items %}
+    <div class='post'>
+      <div class='post-item-image'>
+        {% load static %}
+        <img src="{{ item.image.url }}" alt="{{item.name}}">
+      </div>
+      <div class='post-item-text'>
+        <p class="item-title">{{item.name}}</p>
+        <div class='item-tag'>
+          <p>NTD. {{item.price}}</p>
+          <button class='love-item love-item-active'>&#10084;</button>
+          <button class='buy-item buy-item-active'>&plus;</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock post %}
+
+{% block preview %}
+{% comment %} <div class="preview-container">
+  <div class='preview-fixed-container'>
+    <div class='t-item-description'>
+      <div class='t-item-image'>
+        {% load static %}
+        <img src="{% static 'images/test.jpg' %}" alt="">
+      </div>
+      <div class='t-item-text'>
+        <p class='t-item-title'>玻璃花瓶</p>
+        <p>NTD. 150 | 2個
+        </p>
+        <P>交易方式</P>
+        <P>商品狀況</P>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+{% endblock preview %}
