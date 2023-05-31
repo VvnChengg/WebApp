@@ -1,6 +1,6 @@
 # chat/views.py
 from django.shortcuts import render
-from chat.models import Message
+from chat.models import Message, Room
 from accounts.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -23,7 +23,6 @@ def room(request, username):
         messages_sent = Message.objects.filter(sender=profile_himself, receiver=profile)
         all_messages = messages_received | messages_sent
         all_messages = all_messages.order_by('created_at')
-        
         
     except User.DoesNotExist:
         print('User does not exist')
