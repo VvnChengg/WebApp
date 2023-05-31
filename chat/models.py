@@ -15,8 +15,10 @@ class Message(models.Model):
     
 
 class Room(models.Model):
-    
-    participants = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='rooms')
+    member = models.ForeignKey(Profile, on_delete=models.CASCADE, default=1)
+    room_name = models.CharField(max_length=100)
+    room_description = models.CharField(max_length=255)
+    room_capacity = models.IntegerField(default=2)
 
     def __str__(self):
-        return self.participants
+        return self.room_name
