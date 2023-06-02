@@ -54,15 +54,14 @@ def room(request, username):
 
     except User.DoesNotExist:
         print('User does not exist')
-        return render(request, "chat/index.html", {"alert": "No such user called " + username + "."})
+        return render(request, "chat/index.html", {"alert": "No such user named: " + username})
     except Profile.DoesNotExist:
         print('Profile does not exist')
         return False
 
     rooms_himself = Room.objects.filter(member=profile_himself)
     room_details_himself = [room.room_detail for room in rooms_himself]
-    for i in room_details_himself:
-        print(i.room_name)
+
     other_rooms = Room.objects.filter(
         ~Q(member=profile_himself),  # Exclude rooms associated with Profile A
         room_detail__in=room_details_himself
