@@ -11,7 +11,19 @@ from django.db.models import Q
 
 @login_required
 def index(request):
-    return render(request, "chat/index.html")
+    profile_himself = Profile.objects.get(user=request.user)
+    rooms_himself = Room.objects.filter(member=profile_himself)
+    room_details_himself = [room.room_detail for room in rooms_himself]
+
+    other_rooms = Room.objects.filter(
+        ~Q(member=profile_himself),  # Exclude rooms associated with Profile A
+        room_detail__in=room_details_himself
+    )
+
+    context = {
+        'rooms': other_rooms,
+    }
+    return render(request, "chat/index.html", context)
 
 
 @login_required
