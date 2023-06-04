@@ -7,7 +7,7 @@
     <div class='post'>
       <div class='post-item-image'>
         {% load static %}
-        <img src="{{item.image.url}}" alt="{{item.name}}">
+        <img src="{{ item.image.url }}" alt="{{item.name}}">
       </div>
       <div class='post-item-text'>
         <p class="item-title">{{item.name}}</p>
@@ -24,7 +24,7 @@
 {% endblock post %}
 
 {% block preview %}
-{% comment %} <div class="preview-container">
+ {% comment %} <div class="preview-container">
   <div class='preview-fixed-container'>
     <div class='t-item-description'>
       <div class='t-item-image'>
