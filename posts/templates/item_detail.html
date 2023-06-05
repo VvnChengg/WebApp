@@ -1,0 +1,173 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>My Web App</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}?v=3">
+  <link rel="stylesheet" href="{% static 'navbar.css' %}?v=3">
+</head>
+<body>
+    
+    <!-- top bar container -->
+	<div class="top-bar-container">
+		<div class="top-bar-menu container">
+			<a href="#">
+				<img src="{% static './images/language.png' %}" alt="">
+				<div>語言</div>
+			</a>
+			<a href="http://127.0.0.1:8000/">
+				<img src="{% static './images/person.png' %}" alt="">
+				<div>會員登入</div>
+			</a>
+		</div>
+	</div>
+
+    <!-- nav bar container -->
+	<div class="nav-bar-container">
+		<div class="nav-bar-menu container">
+			<div class="menu">
+				<ul>
+					<li class="menu-item"><a href="#">首頁</a></li>
+					<li class="menu-item"><a href="#">二手市集</a></li>
+					<li class="menu-item"><a href="#article">專欄文章</a></li>
+					<li class="menu-item"><a href="#campaign">活動</a></li>
+					<li class="menu-item"><a href="http://127.0.0.1:8000/chat/">聊天室</a></li>
+				</ul>
+			</div>
+			<div class="top-search">
+				<a><img id="top-search-btn" src="{% static './images/search.png' %}" alt=""></a>
+			</div>
+			<div class="show-search" id="show-search">
+				<form role="search" method="get" id="searchform" action="">
+					<div><input type="text" class="search-input" placeholder="搜尋" name="s" id="s" /></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+    <!-- 按鈕 -->
+    <button id="sell-button">我要販賣物品</button>
+    <script>
+        const sellBtn = document.querySelector('#sell-button');
+        sellBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/sell';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+
+    <button id="my-item-button">我正在販賣的物品</button>
+    <script>
+        const myItemBtn = document.querySelector('#my-item-button');
+        myItemBtn.addEventListener('click', () => {
+            {% if not request.user.is_authenticated %}
+                alert("請先登入");
+            {% else %}
+                const url = '/posts/my-item';
+                window.location.href = url;
+            {% endif %}
+        });        
+    </script>
+    
+    <!-- 商品類別 -->
+    <div class="categories">
+        <ul>
+            <li class="{% if not category %}active{% endif %}">
+                <a href="{% url 'item_list' %}" onclick="location.href=this.href;">全部</a>
+            </li>
+            <li class="{% if category == '衣物' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '衣物' %}" onclick="location.href=this.href;">衣物</a>
+            </li>
+            <li class="{% if category == '鞋子' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '鞋子' %}" onclick="location.href=this.href;">鞋子</a>
+            </li>
+            <li class="{% if category == '3C' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '3C' %}" onclick="location.href=this.href;">3C</a>
+            </li>
+            <li class="{% if category == '其他' %}active{% endif %}">
+                <a href="{% url 'item_list_by_category' '其他' %}" onclick="location.href=this.href;">其他</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="item-container">
+        {% for item in items %}
+            <div class="newItem">
+                <div class="item-image-container">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}"></img>
+                </div>
+                <div class="item-text-container">
+                    <h3>{{ item.name }}</h3>
+                    <p>＄{{ item.price }}</p>
+                </div>
+                <div class="button-container">
+                    <button class="item-details-button" data-item-id="{{ item.item_id }}">詳細資訊</button>
+                </div>
+            </div>
+            
+            {% comment %} <div class="item-details-wrapper"> {% endcomment %}
+            <div class="item-details-container" data-item-id="{{ item.item_id }}">
+                <!-- 商品詳細資訊 -->
+                <div class="item-details-image">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+                </div>
+                <div class="item-details-text">
+                    <h2>{{ item.name }}</h3>
+                    <h3>＄{{ item.price }}</p>
+                    <p>數量：{{ item.quantity }}</p>
+                <p>分類：{{ item.category }}</p>
+                    <p>交易方式：{{ item.transaction_type }}</p>
+                    <p>面交地點：{{ item.transaction_location }}</p>
+                    <p>商品狀況：{{ item.condition }}</p>
+                </div>
+
+                <div class="contact-container">
+                    <div class="contact-detail" style="display: flex; margin: 2px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-quote" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path d="M7.066 4.76A1.665 1.665 0 0 0 4 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z"/>
+                          </svg>
+                        <h4><span style="margin: 2px;">賣家聯絡方法：</span><a href="http://127.0.0.1:8000/chat/{{ item.username }}">賣家{{ item.username }}</a></h4>
+                    </div>
+                </div>
+
+                <label>留言板：</label>
+                <form method="post" action="{% url 'item_detail' item_id=item.pk %}" id="comment-form">
+                    {% csrf_token %}
+                    <textarea id="comment-input" name="comment"></textarea>
+                    <br>
+                    <button type="submit" id="comment-submit-button">留言</button>
+                </form>
+            
+                <div class="comments">
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <div class="comment-user-info">
+                                <img src="{% static './images/profile-user.png' %}" alt="{{ comment.user.name }}" class="avatar">
+                                <div class="comment-user-details">
+                                <p class="comment-username">{{ comment.username }}</p>
+                                <p class="comment-content">{{ comment.content }}</p>
+                                </div>
+                            </div>
+                            <p class="comment-time">{{ comment.created_at }}</p>
+                        </div>
+                    {% empty %}
+                        <p>目前還沒有留言。</p>
+                    {% endfor %}
+                </div>
+            
+                <button class="close-button" data-item-id="{{ item.item_id }}">X</button>
+            </div>
+            {% comment %} </div> {% endcomment %}
+            
+        {% endfor %}
+    </div>
+    
+    <script src="{% static 'item-detail.js' %}"></script>
+</body>
+</html>
