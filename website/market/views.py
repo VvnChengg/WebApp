@@ -44,8 +44,8 @@ def user_interface(request):
     elif love_item_flag:
         love_item = [item.item for item in Love.objects.filter(user=user)]
         return  render(request, 'mk_user.html', {
-            'items': Item.objects.filter(user=user, category=category_type, idx__in=love_item) \
-                if category_type else Item.objects.filter(user=user, idx__in=love_item),
+            'items': Item.objects.filter(category=category_type, idx__in=love_item) \
+                if category_type else Item.objects.filter(idx__in=love_item),
             'category': category_type,
             'previews': preview_index,
             'love_check': 'check',
