@@ -6,6 +6,10 @@ def mail_for_changing_password(mail, token):
     """ send the mail for changing password """
     subject = '[好市好事]更改密碼'
     message = f'您好, 更改密碼連結 http://127.0.0.1:8000/change-password/{token}'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [mail]
+    send_mail(subject, message, email_from, recipient_list)
+    return True
 
 
 def mail_for_token_verification(email, token):
