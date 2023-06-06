@@ -159,14 +159,19 @@
 							{% endif %}	
 						</div>
 					</div>
-					<script>
-						document.querySelector('.campaign-register').addEventListener('click', () => {
-							{% if not request.user.is_authenticated %}
-							alert('請先登入')
-							{% endif %}
-						})
-					</script>
 					{% endfor %}
+					<script>
+						var isAlertShown = false;
+						var campaignRegisters = document.querySelectorAll('.campaign-register');
+						campaignRegisters.forEach(function(campaignRegister) {
+							campaignRegister.addEventListener('click', function() {
+								{% if not request.user.is_authenticated and not isAlertShown %}
+									alert('請先登入')
+									isAlertShown = true;
+								{% endif %}
+							});
+						});
+					</script>
 				</div>
 				{% if request.user.is_authenticated %}
 				<div class="campaign-form-container">
