@@ -109,7 +109,7 @@ def forget_password(request):
             user_obj = User.objects.get(username = username)
             token = str(uuid.uuid4())
             profile_obj= Profile.objects.get(user = user_obj)
-            profile_obj.auth_token = token
+            profile_obj.token = token
             profile_obj.save()
             mail_for_changing_password(user_obj.email , token)
             messages.success(request, 'An email is sent.')
@@ -123,7 +123,7 @@ def change_password(request, token):
     context = {}
         
     try:
-        profile_obj = Profile.objects.filter(auth_token = token).first()
+        profile_obj = Profile.objects.filter(token = token).first()
         context = {'user_id' : profile_obj.user.id}
         
         if request.method == 'POST':
@@ -133,14 +133,12 @@ def change_password(request, token):
             
             if user_id is None:
                 messages.success(request, 'No user id found.')
-                return redirect('change_password')
-                # return redirect(f'/change-password/{token}/')
+                return redirect(f'login/change-password/{token}/')
                 
             
             if  new_password != confirm_password:
                 messages.success(request, 'both should  be equal.')
-                return redirect('change_password')
-                # return redirect(f'/change-password/{token}/')
+                return redirect(f'login/change-password/{token}/')
                          
             
             user_obj = User.objects.get(id = user_id)
