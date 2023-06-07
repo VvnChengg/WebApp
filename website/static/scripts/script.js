@@ -35,7 +35,7 @@ btn[3].onclick = function () {
 }
 
 
-document.querySelector('#article-01').addEventListener('click', () => {
+document.querySelector('#article-01')?.addEventListener('click', () => {
     document.querySelector('.popup-page').classList.add('active');
     document.getElementById('popup-title').innerHTML = '斷捨離妙招';
     document.getElementById('popup-contents').innerHTML = (
@@ -56,7 +56,7 @@ document.querySelector('#article-01').addEventListener('click', () => {
     );
 });
 
-document.querySelector('#article-02').addEventListener('click', () => {
+document.querySelector('#article-02')?.addEventListener('click', () => {
     document.querySelector('.popup-page').classList.add('active');
     document.getElementById('popup-title').innerHTML = '二手市集，新的綠色?';
     document.getElementById('popup-contents').innerHTML = (
@@ -79,7 +79,7 @@ document.querySelector('#article-02').addEventListener('click', () => {
     );
 });
 
-document.querySelector('#article-03').addEventListener('click', () => {
+document.querySelector('#article-03')?.addEventListener('click', () => {
     document.querySelector('.popup-page').classList.add('active');
     document.getElementById('popup-title').innerHTML = '網路市集挖寶!';
     document.getElementById('popup-contents').innerHTML = (
@@ -101,7 +101,7 @@ document.querySelector('#article-03').addEventListener('click', () => {
     );
 });
 
-document.querySelector('#article-04').addEventListener('click', () => {
+document.querySelector('#article-04')?.addEventListener('click', () => {
     document.querySelector('.popup-page').classList.add('active');
     document.getElementById('popup-title').innerHTML = '二手消費文化';
     document.getElementById('popup-contents').innerHTML = (
@@ -124,7 +124,7 @@ document.querySelector('#article-04').addEventListener('click', () => {
     );
 });
 
-document.querySelector('.popup-page .close-btn').addEventListener('click', () => {
+document.querySelector('.popup-page .close-btn')?.addEventListener('click', () => {
     document.querySelector('.popup-page').classList.remove('active');
 });
 

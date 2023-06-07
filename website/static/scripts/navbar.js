@@ -8,13 +8,11 @@ search_btn.onclick = function () {
     if (search_flg === false) {
         cancel_btn.classList.add('search-active');
         search_bar.classList.add('search-active');
-        
         search_flg = true;
     }
     else {
         cancel_btn.classList.remove('search-active');
         search_bar.classList.remove('search-active');
-        
         search_flg = false;
     }
 }

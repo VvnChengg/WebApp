@@ -1,19 +1,19 @@
 
 
-document.querySelector('.campaign-add').addEventListener('click', () => {
-    document.querySelector('.campaign-form-container').classList.add('form-active');
-    document.querySelector('.campaign-form-overlay').classList.add('overlay-active');
-})
+// document.querySelector('.campaign-add')?.addEventListener('click', () => {
+//     document.querySelector('.campaign-form-container')?.classList.add('form-active');
+//     document.querySelector('.campaign-form-overlay')?.classList.add('overlay-active');
+// })
 
-document.querySelector('.campaign-form-close').addEventListener('click', () => {
-    document.querySelector('.campaign-form-container').classList.remove('form-active');
-    document.querySelector('.campaign-form-overlay').classList.remove('overlay-active');
+document.querySelector('.campaign-form-close')?.addEventListener('click', () => {
+    document.querySelector('.campaign-form-container')?.classList.remove('form-active');
+    document.querySelector('.campaign-form-overlay')?.classList.remove('overlay-active');
 })
 
 // query the campaign contents
 const submit_btn = document.querySelector('.campaign-form-add');
 
-submit_btn.addEventListener('submit', (event) => {
+submit_btn?.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const event_name = document.querySelector('#name-input').value;
@@ -21,6 +21,7 @@ submit_btn.addEventListener('submit', (event) => {
     const event_time = document.querySelector('#time-input').value;
     const event_loca = document.querySelector('#loca-input').value;
     const event_desc = document.querySelector('#desc-input').value;
+
     // create_campaign({
     //     'name': event_name,
     //     'date': event_date,
@@ -28,9 +29,9 @@ submit_btn.addEventListener('submit', (event) => {
     //     'loca': event_loca,
     //     'desc': event_desc
     // });
-    document.querySelector('.campaign-form-container').classList.remove('form-active');
-    document.querySelector('.campaign-form-overlay').classList.remove('overlay-active');
 
+    document.querySelector('.campaign-form-overlay').classList.remove('overlay-active');
+    document.querySelector('.campaign-form-container').classList.remove('form-active');
     // window.location.href = 'http://127.0.0.1:8000/#campaign';
 
 });
@@ -55,17 +56,17 @@ function create_campaign(event) {
 const campaign_shelve = document.querySelector('.campaign-shelve');
 let isDragStart = false, prePageX, preScrollLeft;
 
-campaign_shelve.addEventListener('mousedown', (event) => {
+campaign_shelve?.addEventListener('mousedown', (event) => {
     isDragStart = true;
     prePageX = event.pageX;
     preScrollLeft = campaign_shelve.scrollLeft;
 });
 
-campaign_shelve.addEventListener('mouseup', () => {
+campaign_shelve?.addEventListener('mouseup', () => {
     isDragStart = false;
 });
 
-campaign_shelve.addEventListener('mousemove', (event) => {
+campaign_shelve?.addEventListener('mousemove', (event) => {
     if (!isDragStart) return;
     event.preventDefault();
     let positionDiff = event.pageX - prePageX;
