@@ -130,7 +130,7 @@
   background: none;
   display: flex;
   align-items: center;
-  margin: 10px 60px 0 5px;
+  margin: 10px 40px 0 5px;
   font-size: 13px;
   color: #313131;
 
@@ -319,6 +319,7 @@
 
 .t-item-row img {
   min-width: 100%;
+  max-width: 100%;
   background: none;
 }
 
