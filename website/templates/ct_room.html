@@ -59,8 +59,7 @@
             <div class="col-15 col-lg-5 col-xl-3 border-right">
                <div class="px-4 d-none d-md-block">
                   <div class="d-flex align-items-center">
-                     <form id="room-name-form" class="flex-grow-1" method="POST">
-                        {% csrf_token %}
+                     <form id="room-name-form" class="flex-grow-1">
                         <input type="text" id="room-name-submit" class="form-control my-3" size="100" placeholder="搜尋...">
                      </form>
                   </div>
@@ -187,6 +186,12 @@
 			  document.querySelector('#chat-message-submit').click();
 		  }
 	  };
+
+     document.querySelector('#room-name-form').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+               document.querySelector('#room-name-submit').click();
+            }
+     };
 
      document.querySelector('#room-name-form').onsubmit = function(e) {
          var roomName = document.querySelector('#room-name-submit').value;

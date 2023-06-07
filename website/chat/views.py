@@ -102,6 +102,11 @@ def search_user(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data["username"]
+            username = form.cleaned_data.get('room-name-submit', None)
+            print(username)
         else:
-            return room(request, request.user.username)
+            return room(request, "Ken")
+        
+    for i in range(50):
+        print("sgojnajns")
+    return room(request, "Ken")
