@@ -1,0 +1,217 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <title>好市好聊</title>
+
+  <!-- Required stylesheet files -->
+  <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/room.css' %}">
+  <link rel="icon" href="{% static 'images/icon.png' %}" type="image/png">
+</head>
+
+<body>
+	<!-- top bar container -->
+	<div class="top-bar-container">
+	  <div class="top-bar-menu container">
+		 <a href={% url 'login_interface' %}>
+			<img src="{% static 'images/person.png' %}" alt="">
+			{% if not request.user.is_authenticated %}
+			<div>會員登入</div>
+			{% else %}
+			<div>{{ user.username }}</div>
+			{% endif %}
+		 </a>
+	  </div>
+	</div>
+	
+	<!-- nav bar container -->
+	<head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" \
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+  </head>
+  
+<main class="content">
+   <div class="container p-0">
+         <!-- nav bar container -->
+      <header class="nav-bar-container">
+         <div class="nav-bar-menu container">
+            <div class="menu">
+               <ul>
+                  <li class="menu-item"><a href="{% url 'index' %}#">首頁</a></li>
+                  <li class="menu-item"><a href="{% url 'market_index' %}">二手市集</a></li>
+                  <li class="menu-item"><a href="{% url 'index'%}#article">專欄文章</a></li>
+                  <li class="menu-item"><a href="{% url 'index'%}#campaign">活動</a></li>
+                  {% if user.username %}<li class="menu-item"><a href="{% url 'room' request.user.username %}">聊天室</a></li> {% endif %}
+               </ul>
+            </div>
+            
+         </div>
+      </header>
+      
+      <h1 class="h3 mb-3">好市好聊</h1>
+
+      <div class="card">
+          <div class="row g-0">   
+            <div class="col-15 col-lg-5 col-xl-3 border-right">
+               <div class="px-4 d-none d-md-block">
+                  <div class="d-flex align-items-center">
+                     <form id="room-name-form" class="flex-grow-1" method="POST">
+                        {% csrf_token %}
+                        <input type="text" id="room-name-submit" class="form-control my-3" size="100" placeholder="搜尋...">
+                     </form>
+                  </div>
+                  
+               </div>
+
+               <div>
+                  {% for room in rooms %}
+                     <a href="{% url 'room' username=room.member.user.username %}" class="list-group-item list-group-item-action border-0">
+                        <div class="badge bg-success float-right">{{ user.unread }} </div>
+                        <div class="d-flex align-items-start">
+                           <img src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-0.jpg" class="rounded-circle mr-1" alt="William Harris" width="40" height="40">
+                           <div class="flex-grow-1 ml-3">
+                              {{ room.member }}:
+                              <div class="small"><span class="fas fa-circle chat-online"></span> {{ room.member.user.last_login }} </div>
+                           </div>
+                        </div>
+                     </a>
+                  {% endfor %}
+               </div>
+
+               <hr class="d-block d-lg-none mt-1 mb-0">
+            </div>
+            <div class="col-12 col-lg-7 col-xl-9">
+               <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                  <div class="d-flex align-items-center py-1">
+                     <div class="position-relative">
+                        <img src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-0.jpg" class="rounded-circle mr-1" alt="{{ contact }}" width="40" height="40">
+                     </div>
+                     <div class="flex-grow-1 pl-3">
+                        <strong>{{ contact }}</strong>
+                        <!-- <div class="text-muted small"><em>Typing...</em></div> -->
+                     </div>
+                  </div>
+               </div>
+
+               <div class="position-relative">
+                  <div class="chat-messages p-4">
+                     <div class="chat-messages p-4" id="chat-log">
+                        {% for message in messages %}
+                           {% if message.sender == contact %}
+                              <div class="chat-message-left pb-4">
+                                 <div>
+                                    <img src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-0.jpg" class="rounded-circle mr-1" width="40" height="40">
+                                    <div class="text-muted small text-nowrap mt-2">{{ message.created_at.time }}</div>
+                                 </div>
+                                 <div class="font-weight-bold mb-1">{{ contact }}</div>
+                                 <div class="flex-shrink-1 bg-light rounded py-1 px-3 mr-9">{{ message.content }}</div>
+                              </div>
+                           {% else %}
+                              <div class="chat-message-right pb-4">
+                                 <div>
+                                    <img src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-0.jpg" class="rounded-circle mr-1" width="40" height="40">
+                                    <div class="text-muted small text-nowrap mt-2">{{ message.created_at.time }}</div>
+                                 </div>
+                                 <div class="font-weight-bold mb-1">{{ user }}</div>
+                                 <div class="flex-shrink-1 bg-light rounded py-1 px-3 mr-9">{{ message.content }}</div>
+                              </div>
+                           {% endif %}
+                        {% empty%}
+                           <div>還沒有信息。</div>
+                        {% endfor %}
+                     </div>
+                  </div>
+               </div>
+
+               <div class="flex-grow-0 py-3 px-4 border-top">
+                  <div class="input-group">
+                     <input type="text" class="form-control" id="chat-message-input" placeholder="Type your message" required="required" pattern="[A-Za-z0-9]{1,20}">
+                     <button class="btn btn-primary" id="chat-message-submit">Send</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</main>
+	  {{ room_name|json_script:"room-name" }}
+	  {{ request.user.username|json_script:"username" }}
+  
+  <script>
+	  const roomName = JSON.parse(document.getElementById('room-name').textContent);
+	  const username = JSON.parse(document.getElementById('username').textContent);
+  
+	  const chatSocket = new WebSocket(
+		  'ws://'
+		  + window.location.host
+		  + '/ws/chat/'
+		  + roomName
+		  + '/'
+	  );
+  
+	  chatSocket.onmessage = function(e) {
+		  const data = JSON.parse(e.data);
+  
+		  document.querySelector('#chat-message-input').value = '';
+		  const chatLog = document.querySelector('#chat-log');
+		  const temp = document.createElement('div');
+		  temp.className += "chat-message-right pb-4";
+		  
+		  const newAvatar = document.createElement('div');
+		  const newMessage = document.createElement('div');
+		  const sender = document.createElement('div');
+		  
+		  newAvatar.innerHTML = `<img src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-0.jpg" class="rounded-circle mr-1" width="40" height="40">` + `<div class="text-muted small text-nowrap mt-2">` + data.created_at + `</div>`;
+		  temp.appendChild(newAvatar);
+		  sender.className += "font-weight-bold mb-1";
+		  sender.textContent = data.username;
+		  temp.appendChild(sender);
+		  newMessage.className += "flex-shrink-1 bg-light rounded py-2 px-3 mr-3";
+		  newMessage.textContent = data.message;
+		  temp.appendChild(newMessage);
+  
+		  chatLog.appendChild(temp);
+	  };
+  
+	  chatSocket.onclose = function(e) {
+		  console.error('Chat socket closed unexpectedly');
+	  };
+  
+	  document.querySelector('#chat-message-input').focus();
+	  document.querySelector('#chat-message-input').onkeyup = function(e) {
+		  if (e.keyCode === 13) {  // enter, return
+			  document.querySelector('#chat-message-submit').click();
+		  }
+	  };
+
+     document.querySelector('#room-name-form').onsubmit = function(e) {
+         var roomName = document.querySelector('#room-name-submit').value;
+         if (roomName != '') {
+            window.location.pathname.replace('/chat/' + roomName);
+         }
+     };
+  
+	  document.querySelector('#chat-message-submit').onclick = function(e) {
+		  const messageInputDom = document.querySelector('#chat-message-input');
+		  const messageInput = messageInputDom.value;
+		  if (messageInput != "") {
+			  chatSocket.send(JSON.stringify({
+			  'username': username,
+			  'message': messageInput,
+			  'receiver': roomName
+			  }));
+		  }
+		  else {
+			  console.log('NOTE: Message is an empty string.')
+		  }
+	  };
+  
+	  
+  </script>
+  
+</body>
+</html>
