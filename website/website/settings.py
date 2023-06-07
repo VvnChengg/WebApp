@@ -32,6 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
+
+    'chat.apps.ChatConfig',
     'index.apps.IndexConfig',
     'login.apps.LoginConfig',
     'market.apps.MarketConfig',
@@ -140,3 +144,16 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'goodmarket1313@gmail.com'
 EMAIL_HOST_PASSWORD = 'uadzcflgmlgveacp' 
+
+# Daphne
+ASGI_APPLICATION = "website.asgi.application"
+
+# Channels
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
