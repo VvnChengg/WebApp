@@ -25,7 +25,7 @@
             {% if user.get_username == item.user %}
             <a class='buy-item' href="{% url 'remove_item' idx=item.idx %}">&minus;</a>
             {% else %}
-            <a class='buy-item'>&plus;</a>
+            <a class='buy-item' href="{% url 'room' username=item.user%}">&plus;</a>
             {% endif %}
           </div>
         </div>
