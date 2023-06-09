@@ -48,18 +48,16 @@ If you are on macOS, you can also try running `python3 manage.py runserver` if t
 8. To log-in, we have prepared two users account for you to explore around.
 
 - The first account:
-
-```
-Username:Owen
-Password:1
-```
+Username:
+```Owen```
+Password:
+```1```
 
 - The second account:
-
-```
-Username:Josh
-Password:1
-```
+Username:
+```Josh```
+Password:
+```1```
 
 ## Features
 
