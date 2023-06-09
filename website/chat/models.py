@@ -8,7 +8,7 @@ class Message(models.Model):
     sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="sender", default=1)
     receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="receiver", default=2)
     content = models.TextField(max_length=200)
-    created_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.sender}: {self.content}'

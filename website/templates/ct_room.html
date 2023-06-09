@@ -15,7 +15,7 @@
 <body>
 	<!-- top bar container -->
 	<div class="top-bar-container">
-	  <div class="top-bar-menu container">
+	  <div class="top-bar-menu container"> 
 		 <a href={% url 'login_interface' %}>
 			<img src="{% static 'images/person.png' %}" alt="">
 			{% if not request.user.is_authenticated %}
@@ -59,9 +59,13 @@
             <div class="col-15 col-lg-5 col-xl-3 border-right">
                <div class="px-4 d-none d-md-block">
                   <div class="d-flex align-items-center">
-                     <form id="room-name-form" class="flex-grow-1">
+                     <!-- <form id="room-name-form" class="flex-grow-1">
                         <input type="text" id="room-name-submit" class="form-control my-3" size="100" placeholder="搜尋...">
-                     </form>
+                     </form> -->
+                     <div class="input-group flex-grow-1">
+                        <input id="room-name-input" type="text" size="100" class="form-control my-3" placeholder="搜尋 User"><br>
+                        <input id="room-name-submit" type="button" value="Enter" style="display: none;">
+                     </div>
                   </div>
                   
                </div>
@@ -187,18 +191,17 @@
 		  }
 	  };
 
-     document.querySelector('#room-name-form').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-               document.querySelector('#room-name-submit').click();
-            }
-     };
-
-     document.querySelector('#room-name-form').onsubmit = function(e) {
-         var roomName = document.querySelector('#room-name-submit').value;
-         if (roomName != '') {
-            window.location.pathname.replace('/chat/' + roomName);
-         }
-     };
+     document.querySelector('#room-name-input').focus();
+         document.querySelector('#room-name-input').onkeyup = function(e) {
+             if (e.keyCode === 13) {  // enter, return
+                 document.querySelector('#room-name-submit').click();
+             }
+         };
+ 
+         document.querySelector('#room-name-submit').onclick = function(e) {
+             var roomName = document.querySelector('#room-name-input').value;
+             window.location.pathname = '/chat/' + roomName;
+         };
   
 	  document.querySelector('#chat-message-submit').onclick = function(e) {
 		  const messageInputDom = document.querySelector('#chat-message-input');
